@@ -1,15 +1,11 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 app.use(express.json());
-app.use(express.static('hack-ku-2024/dist'));
+app.use(express.static("hack-ku-2024/dist"));
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log("Listening on port " + port);
-});
-
-// Fallback to index.html for all other requests
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'hack-ku-2024', 'dist', 'index.html'));
 });
 
 //================ API CALLS
