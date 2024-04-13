@@ -1,8 +1,8 @@
 import './App.scss'
 import { useEffect, useState } from "react"
 import UserStats from './UserStats/UserStats'
-import Minimap from './Minimap/Minimap'
 import { Button } from 'react-bootstrap'
+import QuickMap from './Map/QuickMap'
 
 interface User {
   id: number
@@ -45,7 +45,7 @@ function HomePage() {
   return (
     <>
       <UserStats user={user}></UserStats>
-      <Minimap></Minimap>
+      <QuickMap></QuickMap>
       <Button>Open Camera</Button>
     </>
   )
