@@ -2,14 +2,7 @@ import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import ExperienceBar from "./ExperienceBar"
-
-interface User {
-    id: number
-    name: string
-    xp: number
-    nextLevelXP: number
-    level: number
-}
+import { User } from "../../vite.config"
 
 function UserStats( { user } : { user? : User }) {
 
