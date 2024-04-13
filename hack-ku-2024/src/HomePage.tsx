@@ -79,7 +79,10 @@ function HomePage() {
       });
   }
 
-  function handleClickedRetake() {
+  /**
+   * Handles when the used clicks on retake
+   */
+  function handleRetake() {
     setImageData('');
   }
 
@@ -185,7 +188,7 @@ function HomePage() {
             ? 
             <>
               <img src={imageData}/>
-              <button onClick={handleClickedRetake}>Retake</button>
+              <button onClick={handleRetake}>Retake</button>
               <button onClick={() => handleImageChosen(imageData)}>Confirm</button>
             </>
           // If there isn't an image yet...
