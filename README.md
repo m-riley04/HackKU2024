@@ -9,8 +9,10 @@ Glam up your community by picking up litter through this competative and educati
 
 ## ${\color{lightpink}How \space to \space use}$  
 1 - 
-2 - 
-3 - 
-4 - 
+
 
 ## ${\color{lightpink}Specifics}$
+
+## ${\color{lightpink}Upload \space instructions}$
+
+## ${\color{lightpink}Technology \space used}$
