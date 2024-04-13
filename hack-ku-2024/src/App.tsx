@@ -22,6 +22,15 @@ function App() {
     });
   }
 
+  useEffect(() => {
+    if (user == undefined) {
+      // Set current user for debugging/placeholder
+      const currentUserId = 3;
+
+      // Get the current user from the database
+      handleSetUser(currentUserId)
+    }
+  }, [user]);
   return (
     <>
       <div>
