@@ -1,4 +1,4 @@
-# $${\color{lightblue}**Hack KU \space 2024**}$$  
+# $${\color{lightblue}Hack KU \space 2024}$$  
 ## $${\color{lightblue}Theme: Social \space Good}$$ 
 ### $${\color{lightblue}Project: Glitter \space \space \space \space Members:Averi,Ryland,Riley,Aryan}$$ 
 
