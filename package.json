@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2"
   },
   "name": "hackku2024",
@@ -10,6 +11,6 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Riley Meyerkorth",
   "license": "ISC"
 }
