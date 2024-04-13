@@ -22,7 +22,6 @@ function Minimap() {
     );
   }, []);
 
-
   if (!location) {
     return (
       <div className="map_error">
@@ -34,21 +33,16 @@ function Minimap() {
   return (
     <div className="map">
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-      <Map
-        mapId="efc6d932e1c1638a"
-        defaultCenter={{lat: location.latitude, lng: location.longitude}}
-        defaultZoom={15}
-        gestureHandling={"greedy"}
-        disableDefaultUI={true}
-      >
-        <CustomMarker
-          name="test"
-          id={100}
-          latitude={location.latitude}
-          longitude={location.longitude}
-          image="./images/leep.jpg"
-        />
-      </Map>
+        <Map
+          mapId="efc6d932e1c1638a"
+          defaultCenter={{ lat: location.latitude, lng: location.longitude }}
+          defaultZoom={15}
+          gestureHandling={"greedy"}
+          disableDefaultUI={true}
+        >
+          <CustomMarker id={2} />
+          <CustomMarker id={1} />
+        </Map>
       </APIProvider>
     </div>
   );
