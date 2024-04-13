@@ -21,12 +21,12 @@ function CustomMarker({ name, id, latitude, longitude, image } : { id:number, na
   if (geocodingLibrary) {
     const geocoder = new geocodingLibrary.Geocoder();
 
-    let coords = {
+    const coords = {
       lat: latitude,
       lng: longitude,
     };
 
-    let delta =
+    const delta =
       ((coords.lat - prevCoords.lat) ** 2 +
         (coords.lng - prevCoords.lng) ** 2) **
       0.5;
