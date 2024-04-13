@@ -20,7 +20,10 @@ app.get('/api/users/:id', (req, res) => {
 
 function getUser(id) {
     const users = [
-        {id: 1, name: "Riley"}
+        {id: 1, name: "Riley"},
+        {id: 2, name: "Ryland"},
+        {id: 3, name: "Avery"},
+        {id: 4, name: "Ayren"},
     ];
 
     return users.find(p => p.id == id);
