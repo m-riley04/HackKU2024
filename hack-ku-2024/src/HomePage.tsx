@@ -2,7 +2,7 @@ import './App.scss'
 import { useEffect, useState } from "react"
 import UserStats from './UserStats/UserStats'
 import { Button } from 'react-bootstrap'
-import QuickMap from './Map/QuickMap'
+import Minimap from './Minimap/Minimap'
 import { User } from "./interfaces"
 import Camera from 'react-html5-camera-photo'
 
@@ -55,7 +55,7 @@ function HomePage() {
   return (
     <>
       <UserStats user={user}></UserStats>
-      <QuickMap></QuickMap>
+      <Minimap/>
       <Button onClick={handleOpenCamera}>Open Camera</Button>
     </>
   )

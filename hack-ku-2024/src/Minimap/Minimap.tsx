@@ -1,35 +1,54 @@
-import "./Minimap.scss"
+import { useState } from "react";
+import "./Minimap.scss";
 
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
-import { useGeolocated } from "react-geolocated";
 
-import CustomMarker from "./Marker.tsx";
+import CustomMarker from "./Marker";
 
 function Minimap() {
-    const { coords, isGeolocationAvailable, isGeolocationEnabled } =
-      useGeolocated();
-    const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+  const [location, setLocation] = useState<GeolocationCoordinates>();
 
-    return !(isGeolocationEnabled && isGeolocationAvailable && coords) ? (
+  if (!navigator.geolocation) {
+    return;
+  }
+
+  navigator.geolocation.watchPosition(
+    (position: GeolocationPosition) => {
+      setLocation(position.coords)
+    },
+    () => {},
+  );
+
+  if (!location) {
+    return (
       <div className="map_error">
         <p> Failed to get geolocation data </p>
       </div>
-      ): (
-      <div className="map">
-      <APIProvider apiKey={API_KEY}>
+    );
+  }
+
+  return (
+    <div className="map">
+      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
         <Map
-          mapId={"somethingunique"}
-          defaultCenter={{ lat: coords.latitude, lng: coords.longitude }}
+          mapId="efc6d932e1c1638a"
+          defaultCenter={{ lat: location.latitude, lng: location.longitude }}
           defaultZoom={15}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
         >
-          <CustomMarker name="test" id="test" latitude={coords.latitude} longitude={coords.longitude} image="./images/leep.jpg" />
-
+          <CustomMarker
+            name="test"
+            id="test"
+            latitude={location.latitude}
+            longitude={location.longitude}
+            image="./images/leep.jpg"
+          />
         </Map>
+        <Minimap/>
       </APIProvider>
-      </div>
-    );
+    </div>
+  );
 }
 
-export default Minimap
+export default Minimap;
