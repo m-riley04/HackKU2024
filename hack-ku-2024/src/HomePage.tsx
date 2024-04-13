@@ -4,7 +4,8 @@ import UserStats from './UserStats/UserStats'
 import { Button } from 'react-bootstrap'
 import Minimap from './Minimap/Minimap'
 import { User } from "./interfaces"
-import Camera from 'react-html5-camera-photo'
+import Camera, { FACING_MODES } from 'react-html5-camera-photo'
+import "react-html5-camera-photo/build/css/index.css";
 const APP_URL = "https://hackku2024-lz3sc7ogqa-uc.a.run.app"
 
 function HomePage() {
@@ -48,9 +49,12 @@ function HomePage() {
   }
 
   if (cameraOpen) return (
-    <Camera
-      onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
-    />
+    <>
+      <Camera
+        onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); setCameraOpen(false); } }
+        idealFacingMode = {FACING_MODES.ENVIRONMENT}
+      />
+    </>
   );
 
   return (
