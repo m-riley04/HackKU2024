@@ -10,12 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< Updated upstream
     "@vis.gl/react-google-maps": "^0.8.3",
+=======
+    "bootstrap": "^5.3.3",
+>>>>>>> Stashed changes
     "express": "^4.19.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
+<<<<<<< Updated upstream
     "react-geolocated": "^4.1.2"
+=======
+    "sass": "^1.75.0"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
