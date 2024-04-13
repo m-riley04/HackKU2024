@@ -3,7 +3,7 @@
 
 
 
-## ${\color{lightred}Technical \space Specifications}$  
+## ${\color{lightpink}Technical \space Specifications}$  
 * Node 21.5.0
 * React 5.2.3
 
