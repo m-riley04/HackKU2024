@@ -19,7 +19,7 @@ function CustomMarker({ name, id, latitude, longitude, image } : { id:number, na
 
     navigator.geolocation.watchPosition(
       (position: GeolocationPosition) => {
-        let coords = {
+        const coords = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
