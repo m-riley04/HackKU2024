@@ -7,17 +7,10 @@ app.listen(port, () => {
     console.log("Listening on port " + port);
 });
 
-const users = [
-    {id: 1, name: "Riley", xp: 10, nextLevelXP: 20, level: 2},
-    {id: 2, name: "Ryland", xp: 5, nextLevelXP: 10, level: 1},
-    {id: 3, name: "Averi", xp: 2, nextLevelXP: 300, level: 5},
-    {id: 4, name: "Ayren", xp: 0, nextLevelXP: 50, level: 3},
-];
-
-const pins = [
-    {id: 1, name: "Trash 1", latitude: 0, longitude: 0},
-    {id: 2, name: "Trash 2", latitude: -200, longitude: 100}
-]
+// Fallback to index.html for all other requests
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'hack-ku-2024', 'dist', 'index.html'));
+});
 
 //================ API CALLS
 app.get('/api/users/:id', (req, res) => {
@@ -45,9 +38,19 @@ app.get('/api/pins/:id', (req, res) => {
 
 //================ SERVER FUNCTIONS
 function getUser(id) {
+    const users = [
+        {id: 1, name: "Riley", xp: 10, nextLevelXP: 20, level: 2},
+        {id: 2, name: "Ryland", xp: 5, nextLevelXP: 10, level: 1},
+        {id: 3, name: "Averi", xp: 2, nextLevelXP: 300, level: 5},
+        {id: 4, name: "Ayren", xp: 0, nextLevelXP: 50, level: 3},
+    ];
     return users.find(p => p.id == id);
 }
 
 function getPin(id) {
+    const pins = [
+        {id: 1, name: "Trash 1", latitude: 0, longitude: 0},
+        {id: 2, name: "Trash 2", latitude: -200, longitude: 100}
+    ]
     return pins.find(p => p.id == id)
 }
