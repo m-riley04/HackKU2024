@@ -15,6 +15,47 @@ const openai = new OpenAI({
     apiKey: import.meta.env.VITE_OPENAI_API_KEY, dangerouslyAllowBrowser: true
 });
 
+/**
+ * Processes an image using GPT Vision to determine the material that it is made out of. The possible materials are paper, plastic, metal, glass, styrofoam, and other.
+ * @param uri a public image uri
+ * @returns {string} a string that is a single-word defining the material
+ * 
+ * @throws {Error} if the API/GPT returns nothing, or if it returns "Error" as a string
+ */
+async function getObjectMaterial_GPT(uri: string) {
+  const PROMPT = `You are a tool that's sole purpose is to categorize images of trash. When a user uploads an image of trash, 
+    you must and will only reply in one word from the word list. The categories/words that you are able to respond with are the following:
+    - Paper
+    - Plastic
+    - Metal
+    - Glass
+    - Styrofoam
+    - Other
+    If the user takes a picture of something that is not trash, you must reply with "None". 
+    If something goes wrong during image processing, you must reply with "Error".
+    Please give your best guess.`;
+
+  const response = await openai.chat.completions.create({
+    model: "gpt-4-turbo",
+    messages: [
+      {
+        role: "user",
+        content: [
+          { type: "text", text: PROMPT },
+          { type: "image_url", image_url: { url: uri } },
+        ],
+      },
+    ],
+  });
+
+  if (response.choices && response.choices.length > 0 && response.choices?.at(0)?.message.content?.toLowerCase() != "error") {
+    console.log(`Response: "${response.choices?.at(0)?.message.content}"`); // Process the API response
+    return response.choices?.at(0)?.message.content?.toLowerCase();
+  } else {
+    throw new Error('No response from AI model');
+  }
+}
+
 function HomePage() {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [cameraOpen, setCameraOpen] = useState(false);
@@ -43,68 +84,34 @@ function HomePage() {
   }
 
   /**
-   * 
+   * Function that handles when the image is chosen
    * @param uri image uri to process
    */
   async function handleImageChosen(uri: string) {
     // Show a loading screen
     setLoading(true);
-    
-    // Convert imageData to a public URL if necessary
-    // This example assumes imageData is already a public URL
-    const imageUrl = uri;
-
-    const PROMPT = `You are a tool that's sole purpose is to categorize images of trash. When a user uploads an image of trash, 
-    you must and will only reply in one word from the word list. The categories/words that you are able to respond with are the following:
-    - Paper
-    - Plastic
-    - Metal
-    - Glass
-    - Styrofoam
-    - Other
-    If the user takes a picture of something that is not trash, you must reply with "None". 
-    If something goes wrong during image processing, you must reply with "Error".
-    Please give your best guess.`;
-
+  
+    // Process the image and get the object's material as a string
     try {
-      const response = await openai.chat.completions.create({
-        model: "gpt-4-turbo",
-        messages: [
-          {
-            role: "user",
-            content: [
-              { type: "text", text: PROMPT },
-              { type: "image_url", image_url: { url: imageUrl } },
-            ],
-          },
-        ],
-      });
-
-      if (response.choices && response.choices.length > 0) {
-        console.log(`Response: "${response.choices?.at(0)?.message.content}"`); // Process the API response
-        setTrashCategory(response.choices?.at(0)?.message.content); // Set the trash category
-      } else {
-        throw new Error('No response from AI model');
-      }
+      setTrashCategory(await getObjectMaterial_GPT(uri));
     } catch (error) {
       console.error(error);
     } finally {
-      
       // Check the category
       switch (trashCategory) {
-        case "Plastic":
+        case "plastic":
           break;
-        case "Paper":
+        case "paper":
           break;
-        case "Metal":
+        case "metal":
           break;
-        case "Glass":
+        case "glass":
           break;
-        case "Styrofoam":
+        case "styrofoam":
           break;
-        case "Other":
+        case "other":
           break;
-
+  
         default:
           //setTrashCategory(null);
           break;
@@ -112,7 +119,7 @@ function HomePage() {
       
       //
       console.log(trashCategory)
-
+  
       setLoading(false);
       setImageData(''); // Clear the image data
     }
