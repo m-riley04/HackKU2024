@@ -6,8 +6,14 @@ import Minimap from "./Minimap/Minimap";
 import { User } from "./interfaces";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
 import { APIProvider } from "@vis.gl/react-google-maps";
-import "react-html5-camera-photo/build/css/index.css"
+import "react-html5-camera-photo/build/css/index.css";
+import OpenAI from "openai";
+
 const APP_URL = "https://hackku2024-lz3sc7ogqa-uc.a.run.app";
+
+const openai = new OpenAI({
+    apiKey: import.meta.env.VITE_OPENAI_API_KEY, dangerouslyAllowBrowser: true
+});
 
 function HomePage() {
   const [user, setUser] = useState<User | undefined>(undefined);
