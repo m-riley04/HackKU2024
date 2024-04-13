@@ -15,8 +15,8 @@ const users = [
 ];
 
 const pins = [
-    {id: 1, name: "Trash 1", lattitude: 0, longitude: 0},
-    {id: 2, name: "Trash 2", lattitude: -200, longitude: 100}
+    {id: 1, name: "Trash 1", latitude: 0, longitude: 0},
+    {id: 2, name: "Trash 2", latitude: -200, longitude: 100}
 ]
 
 //================ API CALLS
