@@ -90,11 +90,18 @@ function HomePage() {
       <div>
         {
           (imageData)
-            ? <><img src={imageData}/><button onClick={() => setImageData('')}>Retake</button></>
+          // If an image was taken...
+            ? 
+            <>
+              <img src={imageData}/>
+              <button onClick={handleClickedRetake}>Retake</button>
+              <button onClick={() => handleImageChosen(imageData)}>Confirm</button>
+            </>
+          // If there isn't an image yet...
             : <Camera onTakePhoto={handleTakePhoto} idealFacingMode={FACING_MODES.ENVIRONMENT}/> 
         }
       </div>
-      <button onClick={() => setCameraOpen(false)}>Back</button>
+      <button onClick={handleCloseCamera}>Back</button>
     </>
   );
 
