@@ -6,7 +6,7 @@ import {
   useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
 
-function CustomMarker({ latitude, longitude }) {
+function CustomMarker({ latitude, longitude } : { latitude: number, longitude: number}) {
   const [infowindowOpen, setInfowindowOpen] = useState(true);
   const [markerRef, marker] = useAdvancedMarkerRef();
 
