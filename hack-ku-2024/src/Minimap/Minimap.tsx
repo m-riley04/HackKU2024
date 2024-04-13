@@ -12,7 +12,7 @@ function Minimap() {
     return;
   }
 
-  navigator.geolocation.watchPosition(
+  navigator.geolocation.getCurrentPosition(
     (position: GeolocationPosition) => {
       setLocation(position.coords)
     },
