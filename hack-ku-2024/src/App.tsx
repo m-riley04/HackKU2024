@@ -31,10 +31,16 @@ function App() {
       handleSetUser(currentUserId)
     }
   }, [user]);
+
+  if (!user) {
+    return <><p>Loading user...</p></>
+  }
+
   return (
     <>
+      <UserStats user={user}></UserStats>
       <div>
-        <h1>recycle.me</h1>
+        <h1>{user.name}</h1>
         <button>Click here to play</button>
       </div>
     </>
