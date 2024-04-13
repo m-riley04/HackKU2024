@@ -1,4 +1,4 @@
-$${\color{red}HackKU2024}$$  
+$${\color{light blue}Hack KU 2024}$$  
 ## Theme: Social Good 
 
 
