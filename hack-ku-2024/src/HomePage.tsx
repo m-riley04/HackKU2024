@@ -35,6 +35,9 @@ function HomePage() {
     setImageData('');
   }
 
+  /**
+   * Handles when the user opens the camera
+   */
   function handleOpenCamera() {
     setCameraOpen(true);
   }
