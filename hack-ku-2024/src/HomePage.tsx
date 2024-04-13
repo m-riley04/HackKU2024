@@ -30,12 +30,26 @@ function HomePage() {
       });
   }
 
+  function handleClickedRetake() {
+    setImageData('');
+  }
+
   function handleOpenCamera() {
     setCameraOpen(true);
   }
 
+  /**
+   * Handles when the user closes the camera
+   */
+  function handleCloseCamera() {
+    setCameraOpen(false);
+  }
+
+  /**
+   * Handles taking the photo
+   * @param dataUri the image data uri
+   */
   function handleTakePhoto(dataUri: string) {
-    // Do stuff with the photo...
     console.log(`takePhoto: ${dataUri}`);
     setImageData(dataUri);
   }
