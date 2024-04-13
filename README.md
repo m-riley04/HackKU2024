@@ -1,5 +1,5 @@
-# $${\color{lightblue}Hack KU_2024}$$  
-## $${\color{lightblue}Theme: Social_ Good}$$ 
+# $${\color{lightblue}Hack KU \space 2024}$$  
+## $${\color{lightblue}Theme: Social \space Good}$$ 
 
 
 
