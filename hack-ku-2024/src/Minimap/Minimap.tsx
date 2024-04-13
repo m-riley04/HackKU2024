@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./Minimap.scss";
 
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { Map, useMap } from "@vis.gl/react-google-maps";
 
 import CustomMarker from "./Marker";
 
 function Minimap() {
   const [location, setLocation] = useState<GeolocationCoordinates>();
+  const map = useMap();
 
   if (!navigator.geolocation) {
     return;
@@ -14,7 +15,10 @@ function Minimap() {
 
   navigator.geolocation.getCurrentPosition(
     (position: GeolocationPosition) => {
-      setLocation(position.coords)
+      setLocation(position.coords);
+      if (location && map) {
+        map.panTo({ lat: location.latitude, lng: location.longitude });
+      }
     },
     () => {},
   );
@@ -29,24 +33,20 @@ function Minimap() {
 
   return (
     <div className="map">
-      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-        <Map
-          mapId="efc6d932e1c1638a"
-          defaultCenter={{ lat: location.latitude, lng: location.longitude }}
-          defaultZoom={15}
-          gestureHandling={"greedy"}
-          disableDefaultUI={true}
-        >
-          <CustomMarker
-            name="test"
-            id={0}
-            latitude={location.latitude}
-            longitude={location.longitude}
-            image="./images/leep.jpg"
-          />
-        </Map>
-        <Minimap/>
-      </APIProvider>
+      <Map
+        mapId="efc6d932e1c1638a"
+        defaultZoom={15}
+        gestureHandling={"greedy"}
+        disableDefaultUI={true}
+      >
+        <CustomMarker
+          name="test"
+          id="test"
+          latitude={location.latitude}
+          longitude={location.longitude}
+          image="./images/leep.jpg"
+        />
+      </Map>
     </div>
   );
 }

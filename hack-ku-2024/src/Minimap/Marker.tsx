@@ -11,9 +11,11 @@ import {
 function CustomMarker({ name, id, latitude, longitude, image } : { id:number, name:string, latitude:number, longitude: number, image: string}) {
   const [infowindowOpen, setInfowindowOpen] = useState(true);
   const [markerRef, marker] = useAdvancedMarkerRef();
-  const [prevCoords, setPrevCoords] = useState({lat: 0.0, lng: 0.0});
+  const [prevCoords, setPrevCoords] = useState({ lat: 0.0, lng: 0.0 });
   const [address, setAddress] = useState("Placeholder");
   const METER = 0.00001;
+
+  const marker = AdvancedMarker;
 
   const geocodingLibrary = useMapsLibrary("geocoding");
   if (geocodingLibrary) {
@@ -24,9 +26,12 @@ function CustomMarker({ name, id, latitude, longitude, image } : { id:number, na
       lng: longitude,
     };
 
-    let delta = ((coords.lat - prevCoords.lat) ** 2 + (coords.lng - prevCoords.lng) ** 2) ** 0.5;
+    let delta =
+      ((coords.lat - prevCoords.lat) ** 2 +
+        (coords.lng - prevCoords.lng) ** 2) **
+      0.5;
     if (delta > METER) {
-      setPrevCoords(coords)
+      setPrevCoords(coords);
       geocoder.geocode({ location: coords }, (response) => {
         if (response) {
           setAddress(response[0].formatted_address);
