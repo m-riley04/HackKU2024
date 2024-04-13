@@ -10,8 +10,10 @@ app.listen(port, () => {
     console.log("Listening on port " + port);
 });
 
+const APP_URL = "https://hackku2024-lz3sc7ogqa-uc.a.run.app"
+
 //================ API CALLS
-app.get('/api/users/:id', (req, res) => {
+app.get(`${APP_URL}/api/users/:id`, (req, res) => {
     const id = req.params.id;
     const user = getUser(id);
     if (!user) {
@@ -22,7 +24,7 @@ app.get('/api/users/:id', (req, res) => {
     }
 })
 
-app.get('/api/pins/:id', (req, res) => {
+app.get(`${APP_URL}/api/pins/:id`, (req, res) => {
     const id = req.params.id;
     const pin = getPin(id);
     if (!pin) {
