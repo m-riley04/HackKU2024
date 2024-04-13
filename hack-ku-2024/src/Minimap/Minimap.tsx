@@ -41,7 +41,7 @@ function Minimap() {
       >
         <CustomMarker
           name="test"
-          id="test"
+          id={0}
           latitude={location.latitude}
           longitude={location.longitude}
           image="./images/leep.jpg"
