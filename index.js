@@ -7,6 +7,19 @@ app.listen(port, () => {
     console.log("Listening on port " + port);
 });
 
+const users = [
+    {id: 1, name: "Riley", xp: 10, nextLevelXP: 20, level: 2},
+    {id: 2, name: "Ryland", xp: 5, nextLevelXP: 10, level: 1},
+    {id: 3, name: "Averi", xp: 2, nextLevelXP: 300, level: 5},
+    {id: 4, name: "Ayren", xp: 0, nextLevelXP: 50, level: 3},
+];
+
+const pins = [
+    {id: 1, name: "Trash 1", lattitude: 0, longitude: 0},
+    {id: 2, name: "Trash 2", lattitude: -200, longitude: 100}
+]
+
+//================ API CALLS
 app.get('/api/users/:id', (req, res) => {
     const id = req.params.id;
     const user = getUser(id);
@@ -18,13 +31,23 @@ app.get('/api/users/:id', (req, res) => {
     }
 })
 
-function getUser(id) {
-    const users = [
-        {id: 1, name: "Riley", xp: 10, nextLevelXP: 20, level: 2},
-        {id: 2, name: "Ryland", xp: 5, nextLevelXP: 10, level: 1},
-        {id: 3, name: "Averi", xp: 2, nextLevelXP: 300, level: 5},
-        {id: 4, name: "Ayren", xp: 0, nextLevelXP: 50, level: 3},
-    ];
+app.get('/api/pins/:id', (req, res) => {
+    const id = req.params.id;
+    const pin = getPin(id);
+    if (!pin) {
+        res.status(404).send({ error: `Pin ${id} not found`})
+    }
+    else {
+        res.send({ data: pin })
+    }
+})
 
+
+//================ SERVER FUNCTIONS
+function getUser(id) {
     return users.find(p => p.id == id);
+}
+
+function getPin(id) {
+    return pins.find(p => p.id == id)
 }
