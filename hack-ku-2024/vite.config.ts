@@ -23,6 +23,6 @@ export interface User {
 export interface Pin {
   id: number
   name: string
-  lattitude: number
+  latitude: number
   longitude: number
 }
