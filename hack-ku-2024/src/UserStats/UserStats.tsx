@@ -16,12 +16,14 @@ function UserStats( { user } : { user? : User }) {
   return (
     <Container>
       <Row>
-        <Col>Level {user?.level}</Col>
         <Col>{user?.name}</Col>
+        <Col></Col>
       </Row>
       <Row>
+        <Col>Level {user?.level}</Col>
         <Col><ExperienceBar xp={user?.xp} nextLevelXP={user?.nextLevelXP}></ExperienceBar></Col>
       </Row>
+      
     </Container>
   )
 }
