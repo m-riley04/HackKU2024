@@ -6,6 +6,7 @@ import Minimap from "./Minimap/Minimap";
 import { User } from "./interfaces";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
 import { APIProvider } from "@vis.gl/react-google-maps";
+import "react-html5-camera-photo/build/css/index.css"
 const APP_URL = "https://hackku2024-lz3sc7ogqa-uc.a.run.app";
 
 function HomePage() {
