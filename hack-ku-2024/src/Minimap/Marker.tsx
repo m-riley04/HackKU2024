@@ -41,7 +41,7 @@ function CustomMarker({ name, id, latitude, longitude, image } : { id:number, na
           ref={markerRef}
           onClick={() => setInfowindowOpen(true)}
           position={{ lat: latitude, lng: longitude }}
-          title={"Stub for marker"}
+          title={`Stub for marker ${id}`}
         />
 
         {infowindowOpen && (
