@@ -19,6 +19,7 @@ function HomePage() {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [cameraOpen, setCameraOpen] = useState(false);
   const [imageData, setImageData] = useState('');
+  const [trashCategory, setTrashCategory] = useState<string | null | undefined>("");
   const [loading, setLoading] = useState(false);
 
   /**
@@ -41,6 +42,10 @@ function HomePage() {
     setImageData('');
   }
 
+  /**
+   * 
+   * @param uri image uri to process
+   */
   async function handleImageChosen(uri: string) {
     // Show a loading screen
     setLoading(true);
@@ -77,15 +82,39 @@ function HomePage() {
 
       if (response.choices && response.choices.length > 0) {
         console.log(`Response: "${response.choices?.at(0)?.message.content}"`); // Process the API response
+        setTrashCategory(response.choices?.at(0)?.message.content); // Set the trash category
       } else {
         throw new Error('No response from AI model');
       }
     } catch (error) {
       console.error(error);
     } finally {
+      
+      // Check the category
+      switch (trashCategory) {
+        case "Plastic":
+          break;
+        case "Paper":
+          break;
+        case "Metal":
+          break;
+        case "Glass":
+          break;
+        case "Styrofoam":
+          break;
+        case "Other":
+          break;
+
+        default:
+          //setTrashCategory(null);
+          break;
+      }
+      
+      //
+      console.log(trashCategory)
+
       setLoading(false);
       setImageData(''); // Clear the image data
-      setCameraOpen(false);
     }
 }
 
@@ -112,6 +141,7 @@ function HomePage() {
     setImageData(dataUri);
   }
 
+  //===== DEBUGGING USERS
   useEffect(() => {
     if (user == undefined) {
       // Set current user for debugging/placeholder
@@ -156,6 +186,8 @@ function HomePage() {
         }
       </div>
       <button onClick={handleCloseCamera}>Back</button>
+
+      {(trashCategory) ? <><h3>{trashCategory}</h3></> : <></>}
     </>
   );
 
