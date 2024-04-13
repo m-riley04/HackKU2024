@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors');
+const cors = require('cors')
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -13,7 +13,7 @@ app.listen(port, () => {
 const APP_URL = "https://hackku2024-lz3sc7ogqa-uc.a.run.app"
 
 //================ API CALLS
-app.get(`${APP_URL}/api/users/:id`, (req, res) => {
+app.get(`/api/users/:id`, (req, res) => {
     const id = req.params.id;
     const user = getUser(id);
     if (!user) {
@@ -24,7 +24,7 @@ app.get(`${APP_URL}/api/users/:id`, (req, res) => {
     }
 })
 
-app.get(`${APP_URL}/api/pins/:id`, (req, res) => {
+app.get(`/api/pins/:id`, (req, res) => {
     const id = req.params.id;
     const pin = getPin(id);
     if (!pin) {
