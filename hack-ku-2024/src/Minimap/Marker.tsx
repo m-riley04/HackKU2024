@@ -15,8 +15,6 @@ function CustomMarker({ name, id, latitude, longitude, image } : { id:number, na
   const [address, setAddress] = useState("Placeholder");
   const METER = 0.00001;
 
-  const marker = AdvancedMarker;
-
   const geocodingLibrary = useMapsLibrary("geocoding");
   if (geocodingLibrary) {
     const geocoder = new geocodingLibrary.Geocoder();
