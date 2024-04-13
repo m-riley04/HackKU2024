@@ -4,13 +4,14 @@ import UserStats from "./UserStats/UserStats";
 import { Button } from "react-bootstrap";
 import Minimap from "./Minimap/Minimap";
 import { User } from "./interfaces";
-import Camera from "react-html5-camera-photo";
+import Camera, { FACING_MODES } from "react-html5-camera-photo";
 import { APIProvider } from "@vis.gl/react-google-maps";
 const APP_URL = "https://hackku2024-lz3sc7ogqa-uc.a.run.app";
 
 function HomePage() {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [cameraOpen, setCameraOpen] = useState(false);
+  const [imageData, setImageData] = useState('');
 
   /**
    * Sets the user hook based on a user ID
@@ -35,6 +36,7 @@ function HomePage() {
   function handleTakePhoto(dataUri: string) {
     // Do stuff with the photo...
     console.log(`takePhoto: ${dataUri}`);
+    setImageData(dataUri);
   }
 
   useEffect(() => {
@@ -57,10 +59,14 @@ function HomePage() {
 
   if (cameraOpen) return (
     <>
-      <Camera
-        onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); setCameraOpen(false); } }
-        idealFacingMode = {FACING_MODES.ENVIRONMENT}
-      />
+      <div>
+        {
+          (imageData)
+            ? <><img src={imageData}/><button onClick={() => setImageData('')}>Retake</button></>
+            : <Camera onTakePhoto={handleTakePhoto} idealFacingMode={FACING_MODES.ENVIRONMENT}/> 
+        }
+      </div>
+      <button onClick={() => setCameraOpen(false)}>Back</button>
     </>
   );
 
