@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import UserStats from './UserStats/UserStats'
 import { Button } from 'react-bootstrap'
 import QuickMap from './Map/QuickMap'
-import { User } from "../vite.config"
+import { User } from "./interfaces"
 
 function HomePage() {
   const [user, setUser] = useState<User | undefined>(undefined);
