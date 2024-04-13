@@ -7,7 +7,8 @@ import {
   useMapsLibrary,
 } from "@vis.gl/react-google-maps";
 
-function CustomMarker({ name, id, latitude, longitude, image }) {
+
+function CustomMarker({ name, id, latitude, longitude, image } : { id:number, name:string, latitude:number, longitude: number, image: string}) {
   const [infowindowOpen, setInfowindowOpen] = useState(true);
   const [markerRef, marker] = useAdvancedMarkerRef();
   const [address, setAddress] = useState("Placeholder");
