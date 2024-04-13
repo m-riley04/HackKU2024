@@ -11,6 +11,8 @@ interface User {
 }
 
 function App() {
+  const [user, setUser] = useState<User | undefined>(undefined);
+
 
   return (
     <>
