@@ -4,9 +4,11 @@ import UserStats from './UserStats/UserStats'
 import { Button } from 'react-bootstrap'
 import QuickMap from './Map/QuickMap'
 import { User } from "./interfaces"
+import Camera from 'react-html5-camera-photo'
 
 function HomePage() {
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [cameraOpen, setCameraOpen] = useState(false);
 
   /**
    * Sets the user hook based on a user ID
@@ -19,6 +21,15 @@ function HomePage() {
     .catch(e => {
       console.error("Failed to fetch user:", e);
     });
+  }
+
+  function handleOpenCamera() {
+    setCameraOpen(true);
+  }
+
+  function handleTakePhoto (dataUri:string) {
+    // Do stuff with the photo...
+    console.log(`takePhoto: ${dataUri}`);
   }
 
   useEffect(() => {
@@ -35,11 +46,17 @@ function HomePage() {
     return <><p>Loading user...</p></>
   }
 
+  if (cameraOpen) return (
+    <Camera
+      onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
+    />
+  );
+
   return (
     <>
       <UserStats user={user}></UserStats>
       <QuickMap></QuickMap>
-      <Button>Open Camera</Button>
+      <Button onClick={handleOpenCamera}>Open Camera</Button>
     </>
   )
 }
