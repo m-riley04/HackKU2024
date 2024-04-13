@@ -13,6 +13,7 @@ function HomePage() {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [cameraOpen, setCameraOpen] = useState(false);
   const [imageData, setImageData] = useState('');
+  const [loading, setLoading] = useState(false);
 
   /**
    * Sets the user hook based on a user ID
@@ -72,6 +73,15 @@ function HomePage() {
     );
   }
 
+  if (loading) {
+    return (
+      <>
+        <p>Processing image data...</p>
+      </>
+    );
+  }
+
+  // Check if the camera is open
   if (cameraOpen) return (
     <>
       <div>
