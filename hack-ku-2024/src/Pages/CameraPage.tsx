@@ -1,7 +1,7 @@
 import OpenAI from "openai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
-import { Fact } from "../interfaces";
+import { Fact, User } from "../interfaces";
 
 
 const openai = new OpenAI({
@@ -49,8 +49,54 @@ async function getObjectMaterial_GPT(uri: string) {
       throw new Error('No response from AI model');
     }
 }
+async function updateUser(userId: number, userData: User) {
+    try {
+        const response = await fetch(`${window.location.origin}/api/users/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Server responded with an error');
+        }
+
+        const result = await response.json();
+        console.log('Update successful:', result);
+        return result;
+    } catch (error) {
+        console.error('Failed to update user:', error);
+        throw new Error('Failed to update user');
+    }
+}
+
+async function addXP(user: User, xp: number) {
+
+    user.xp += xp;
+    await checkUserXP(user);
+}
+
+async function checkUserXP(user: User) {
+    // Check if the XP is above the user's next XP
+    if (user.xp >= user.nextLevelXP) {
+        // Increment the level
+        user.level += 1;
+
+        // Get the rollover XP
+        const rolloverXP = user.xp - user.nextLevelXP;
+        user.xp = rolloverXP
+
+        // Set the new level XP
+        user.nextLevelXP = 10 * user.level;
+    }
+
+    // Update the database
+    await updateUser(user.id, user)
+}
   
-function CameraPage() {
+function CameraPage({ user } : { user: User}) {
     const [imageData, setImageData] = useState('');
     const [material, setMaterial] = useState<string | null | undefined>("");
     const [processing, setProcessing] = useState(false);
@@ -91,21 +137,6 @@ function CameraPage() {
         } catch (error) {
             console.error(error);
         } finally {
-            const recyclable = ["plastic", "paper", "metal", "glass"]
-            const nonrecyclable = ["styrofoam", "ceramic"]
-
-            if (nonrecyclable.includes(String(material))) { 
-                // Material is not recyclable
-                setRecyclable(false);
-                
-            } else if (material != "" && recyclable.includes(String(material))) {
-                // Material is reyclable
-                setRecyclable(true);
-            } else {
-                // Material is empty or none
-                setRecyclable(false);
-            }
-            
             setProcessing(false); // Hides the loading screen
             setImageData(''); // Clear the image data
         }
@@ -119,6 +150,50 @@ function CameraPage() {
         console.log(`takePhoto: ${dataUri}`);
         setImageData(dataUri);
     }
+
+    useEffect(() => {
+        // Update the recyclable state
+        const recyclable = ["plastic", "paper", "metal", "glass"]
+        const nonrecyclable = ["styrofoam", "ceramic"]
+
+        if (nonrecyclable.includes(String(material))) { 
+            // Material is not recyclable
+            setRecyclable(false);
+            
+        } else if (material != "" && recyclable.includes(String(material))) {
+            // Material is reyclable
+            setRecyclable(true);
+        } else {
+            // Material is empty or none
+            setRecyclable(false);
+        }
+
+        // Give the user an experience point based on the material
+        let xpToAdd = 1;
+
+        switch (material) {
+            case "plastic":
+                xpToAdd = 5;
+                break;
+            case "styrofoam":
+                xpToAdd = 4;
+                break;
+            case "glass":
+                xpToAdd = 3;
+                break;
+            case "metal":
+                xpToAdd = 2;
+                break;
+            case "paper":
+                xpToAdd = 1;
+                break;
+            default:
+                xpToAdd = 1;
+                break;
+        }
+        
+        addXP(user, xpToAdd);
+    }, [material])
 
     // Processing/loading screen
     if (processing) {
