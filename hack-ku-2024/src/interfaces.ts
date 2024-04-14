@@ -7,6 +7,7 @@ export interface User {
     xp: number
     nextLevelXP: number
     level: number
+    trashCollected: number
   }
   
   /**
@@ -17,4 +18,10 @@ export interface User {
     name: string
     latitude: number
     longitude: number
+  }
+
+  export interface Fact {
+    id: number
+    material: string
+    body: string
   }

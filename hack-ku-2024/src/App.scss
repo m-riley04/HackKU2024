@@ -1,6 +1,27 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+}
+
+@import "../stylesheet.scss";
+
+.picture-preview-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.material-results {
+  background-color: $bg-secondary;
+}
+
+.mb-3 {
+  width: 75%;
+  margin: 0 auto;
+
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.5em;
 }
