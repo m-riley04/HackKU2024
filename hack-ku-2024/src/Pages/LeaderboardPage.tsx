@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Leaderboard from "../Leaderboard/Leaderboard";
 import { User } from "../interfaces";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
+import './Pages.scss'
 
 /**
  * Sorting method for the leaderboard
@@ -49,7 +50,11 @@ function LeaderboardPage() {
 
     return (
         <>
-            <h1>Leaderboard</h1>
+          <div className="leaderboard-header">
+            <div className="leaderboard-text">
+              <h1>Leaderboard</h1>
+            </div>
+          </div>
             <Leaderboard users={users}></Leaderboard>
         </>
     );

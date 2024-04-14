@@ -1,10 +1,19 @@
+import { Col, Row } from "react-bootstrap";
 import { User } from "../interfaces";
+import './Leaderboard.scss';
 
 function LeaderboardItem( { user, index } : { user: User, index: number}) {
 
     return (
-        <div>
-            <p>{index}) {user.name} - {user.trashCollected}</p>
+        <div className="leaderboard-item">
+            <Row>
+            <Col>
+            <p>{index}) {user.name}</p>
+            </Col>
+            <Col className="collected">
+            <p>{user.trashCollected}</p>
+            </Col>
+            </Row>
         </div>
     );
 }
