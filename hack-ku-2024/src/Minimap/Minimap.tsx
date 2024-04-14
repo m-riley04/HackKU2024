@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Minimap.scss";
 
-import { Map, APIProvider, useMap } from "@vis.gl/react-google-maps";
+import { Map, APIProvider } from "@vis.gl/react-google-maps";
 
 import CustomMarker from "./Marker";
 
