@@ -1,11 +1,11 @@
 /*
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const PUBLISHABLE_ROBOFLOW_API_KEY = "YOUR_PUBLISHABLE_ROBOFLOW_API_KEY";
 const PROJECT_URL = "YOUR_PROJECT_URL";
 const MODEL_VERSION = "YOUR_MODEL_VERSION";
 
-const Roboflow = (props) => {
+const Roboflow = () => {
 
   const [inferRunning, setInferRunning] = useState(true);
 
