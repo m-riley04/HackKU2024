@@ -7,11 +7,9 @@ import NavigationButtons from './NavigationButtons/NavigationButtons';
 import LeaderboardPage from './Pages/LeaderboardPage';
 
 function App() {
-
-
   return (
     <BrowserRouter>
-      <div style={{height: "80vh"}}>
+      <div style={{height: "75vh"}}>
         <Routes>
           <Route index element={<HomePage/>}/>
           <Route path="camera" element={<CameraPage/>}/>
