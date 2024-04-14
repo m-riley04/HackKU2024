@@ -22,6 +22,25 @@ const pins = [
     {id: 1, name: "Trash 1", latitude: 0, longitude: 0},
     {id: 2, name: "Trash 2", latitude: -200, longitude: 100}
 ]
+const facts = [
+    {id: 0, material: "glass", body: "Beaches are being depleted of sand, but recycled glass can help replenish them."},
+    {id: 1, material: "glass", body: "One ton of recycled glass saves around 315 kilograms of carbon dioxide emission."},
+    {id: 2, material: "glass", body: "It takes one glass bottle around 1 million years to decompose."},
+    {id: 3, material: "glass", body: "The amount of glass bottles thrown away is enough to fill up the empire state building every 3 weeks."},
+    {id: 4, material: "plastic", body: "Around 2.5 million plastic bottles are thrown away every hour in America."},
+    {id: 5, material: "plastic", body: "By 2050, there will be more plastic than fish in the ocean "},
+    {id: 6, material: "plastic", body: "Plastic contributes to around 19% of global carbon emissions."},
+    {id: 7, material: "plastic", body: "Around 2,000 garbage trucks worth of plastic are dumped into bodies of water every day."},
+    {id: 8, material: "plastic", body: "Plastic littering has a very large carbon footprint."},
+    {id: 9, material: "paper", body: "Paper is the most recycled material."},
+    {id: 10, material: "paper", body: "Recycling one ton of paper saves around 7,000 gallons of water."},
+    {id: 11, material: "paper", body: "Using recycled paper saves around 31% more energy than 'new' paper."},
+    {id: 12, material: "paper", body: "Paper makes up around 33% of garbage output."},
+    {id: 13, material: "other", body: "Around 9 billion tons of litter ends up in the ocean in a year."},
+    {id: 14, material: "other", body: "There is around 152 pieces of litter for every household in the US."},
+    {id: 15, material: "other", body: "Litter is set on fire to easy dispose of it, this leads to toxins that contribute to climate change."},
+    {id: 16, material: "other", body: "The US is the number one country for litter."},
+];
 
 //================ API CALLS
 app.get(`/api/users/:id`, (req, res) => {
