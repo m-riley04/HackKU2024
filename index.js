@@ -76,6 +76,7 @@ async function updateData(datasetId, tableId, conditions, updates) {
         console.log(`Update successful in table ${tableId}`);
     } catch (error) {
         console.error(`Failed to update data in ${tableId}:`, error);
+        console.error(`Detailed Error: ${error.response?.body || error.message}`);
         throw error;
     }
 }
