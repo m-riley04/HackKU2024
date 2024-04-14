@@ -12,5 +12,8 @@
   },
   "keywords": [],
   "author": "Riley Meyerkorth",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@google-cloud/bigquery": "^7.5.2"
+  }
 }
