@@ -16,7 +16,7 @@ function CustomMarker({ id }: { id: number }) {
   const [trashData, setTrashData] = useState({ name: '', id: -1  })
   const [coords, setCoords] = useState({ lat: 0.0, lng: 0.0 });
   const [address, setAddress] = useState("Placeholder");
-  const METER = 0.00001;
+  //const METER = 0.00001;
 
   const geocodingLibrary = useMapsLibrary("geocoding");
 
@@ -57,7 +57,7 @@ function CustomMarker({ id }: { id: number }) {
             anchor={marker}
             disableAutoPan={true}
             maxWidth={200}
-            maxHeight={50}
+            //maxHeight={50}
             onCloseClick={() => setInfowindowOpen(false)}
           >
             <p>
