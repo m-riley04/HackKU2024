@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import { useEffect, useState } from "react";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
 import { Fact, User } from "../interfaces";
+import ScanResults from "../ScanResults/ScanResults";
 
 
 const openai = new OpenAI({
@@ -137,7 +138,6 @@ function CameraPage({ user } : { user: User}) {
         } catch (error) {
             console.error(error);
         } finally {
-            setProcessing(false); // Hides the loading screen
             setImageData(''); // Clear the image data
         }
     }
@@ -196,20 +196,22 @@ function CameraPage({ user } : { user: User}) {
         }
 
         if (xpToAdd > 0) addXP(user, xpToAdd);
+
+        setProcessing(false); // Hides the loading screen
     }, [material])
 
     // Processing/loading screen
     if (processing) {
         return (
-        <>
-            <p>Processing image data...</p>
-        </>
+            <div style={{height: "78vh"}}>
+                <p>Processing image data...</p>
+            </div>
         );
     }
 
     return (
         <>
-        <div>
+        <div style={{height: "73vh"}}>
             {
             (imageData)
             // If an image was taken...
@@ -218,17 +220,17 @@ function CameraPage({ user } : { user: User}) {
                     <div className="picture-preview-container">
                         <img src={imageData}/>
                     </div>
-                    <button onClick={handleRetake}>Retake</button>
-                    <button onClick={() => handleImageChosen(imageData)}>Confirm</button>
+                    <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: "auto"}}>
+                        <button onClick={handleRetake}>Retake</button>
+                        <button onClick={() => handleImageChosen(imageData)}>Confirm</button>
+                    </div>
                 </>
             // If there isn't an image yet...
                 : <Camera onTakePhoto={handleTakePhoto} idealFacingMode={FACING_MODES.ENVIRONMENT}/> 
             }
         </div>
 
-        {(material) ? <><h3>{material}</h3></> : <></>}
-        {(fact) ? <><p>{fact.body}</p></> : <></>}
-        {(recyclable) ? <>Recyclable</> : <>Non-Recyclable</>}
+        {(material) ? <ScanResults material={material} recyclable={recyclable} fact={fact?.body}></ScanResults> : <></>}
         </>
     );
 }
