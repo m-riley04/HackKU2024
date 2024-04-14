@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router";
-import PictureButton from "./PictureButton";
 import "./NavigationButtons.scss"
+import leaderboardIcon from "../../images/leaderboard.png"
+import cameraIcon from "../../images/camera.png"
+import homeIcon from "../../images/home.png"
 
 function NavigationButtons() {
     const navigate = useNavigate();
@@ -18,10 +20,10 @@ function NavigationButtons() {
     }
 
     return (
-        <div style={{display: "inline-flex", margin: "auto"}}>
-            <PictureButton onClick={handleLeaderboard} alt="Leaderboard"/>
-            <PictureButton onClick={handleCamera} alt="Camera"/>
-            <PictureButton onClick={handleHome} alt="Home"/>
+        <div className="buttonContainer">
+            <button onClick={handleLeaderboard} style={{backgroundImage: leaderboardIcon}}><img src={leaderboardIcon}/></button>
+            <button onClick={handleCamera}  style={{backgroundImage: cameraIcon}} className="cameraButton"><img src={cameraIcon}/></button>
+            <button onClick={handleHome}  style={{backgroundImage: homeIcon}}><img src={homeIcon}/></button>
         </div>
     )
 }
