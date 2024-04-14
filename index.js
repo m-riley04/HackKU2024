@@ -2,12 +2,16 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const { BigQuery } = require('@google-cloud/bigquery');
+
+
 const PROJECT_NAME = "hackku2024";
 const DATASET_NAME = "hackku_dataset";
 const bigquery = new BigQuery({
     projectId: PROJECT_NAME,
-    keyFilename: "./bigquerycreds.json"
+    keyFilename: "./bigquerycreds.json" // A file that contains the credentials for BigQuery (not included in the GitHub)
 });
+
+// Start the express server on port 8080
 const app = express();
 app.use(cors());
 app.use(express.json());
