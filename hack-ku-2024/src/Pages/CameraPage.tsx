@@ -55,6 +55,7 @@ function CameraPage() {
     const [material, setMaterial] = useState<string | null | undefined>("");
     const [processing, setProcessing] = useState(false);
     const [fact, setFact] = useState<Fact | undefined>();
+    const [recyclable, setRecyclable] = useState(false);
 
     /**
      * Handles when the used clicks on retake
@@ -95,13 +96,14 @@ function CameraPage() {
 
             if (nonrecyclable.includes(String(material))) { 
                 // Material is not recyclable
+                setRecyclable(false);
                 
             } else if (material != "" && recyclable.includes(String(material))) {
                 // Material is reyclable
-
+                setRecyclable(true);
             } else {
-                // Material is empty
-
+                // Material is empty or none
+                setRecyclable(false);
             }
             
             setProcessing(false); // Hides the loading screen
@@ -148,6 +150,7 @@ function CameraPage() {
 
         {(material) ? <><h3>{material}</h3></> : <></>}
         {(fact) ? <><p>{fact.body}</p></> : <></>}
+        {(recyclable) ? <>Recyclable</> : <>Non-Recyclable</>}
         </>
     );
 }
