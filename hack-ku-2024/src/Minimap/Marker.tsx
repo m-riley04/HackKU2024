@@ -9,16 +9,16 @@ import {
 } from "@vis.gl/react-google-maps";
 import './Marker.scss';
 
-const APP_URL = "https://hackku2024-lz3sc7ogqa-uc.a.run.app";
-
 function CustomMarker({ id }: { id: number }) {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useAdvancedMarkerRef();
 
+  // initialize variables for state
   const [trashData, setTrashData] = useState({ name: '', id: -1  })
   const [coords, setCoords] = useState({ lat: 0.0, lng: 0.0 });
   const [address, setAddress] = useState("Placeholder");
 
+  // load geocoding library
   const geocodingLibrary = useMapsLibrary("geocoding");
 
   const glyphColors = [
@@ -33,11 +33,12 @@ function CustomMarker({ id }: { id: number }) {
   ];
 
   useEffect(() => {
-    console.log(APP_URL);
-    fetch(`${APP_URL}/api/pins/${id}`)
+    // fetch pin from api
+    fetch(`${window.location.origin}/api/pins/${id}`)
       .then((response) => response.json())
       .then((data) => {
         data = data.data;
+        // updates coords and data
         setCoords({lat: data.latitude, lng: data.longitude});
         setTrashData({name: data.name, id: data.id});
       }) // Set the user state
@@ -46,6 +47,7 @@ function CustomMarker({ id }: { id: number }) {
       });
 
     if (geocodingLibrary) {
+      // use geocoding library to get formatted address
       const geocoder = new geocodingLibrary.Geocoder();
         geocoder.geocode({ location: coords }, (response) => {
           if (response) {
@@ -55,6 +57,8 @@ function CustomMarker({ id }: { id: number }) {
     }
   }, [ geocodingLibrary ]);
 
+  // return marker with custom information window with google maps API
+  // populate location & text fields with data from our API
   return (
     <>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
