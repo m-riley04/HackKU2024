@@ -225,6 +225,21 @@ app.put('/api/users/:id', async (req, res) => {
         res.status(500).send({ error: 'Failed to update user data in BigQuery.' });
     }
 });
+//=========== POST
+app.post('/api/pins', async (req, res) => {
+    const { id, name, latitude, longitude } = req.body;
+
+    // Construct the pin object
+    const newPin = [{ id, name, latitude, longitude }];
+
+    try {
+        await insertData(DATASET_NAME, 'pins', newPin);
+        res.status(201).send({ success: true, message: 'Pin added successfully.' });
+    } catch (error) {
+        console.error('Failed to add new pin:', error);
+        res.status(500).send({ error: 'Failed to add pin to BigQuery.' });
+    }
+});
 
 //================ PLACEHOLDER DATA
 const users = [
