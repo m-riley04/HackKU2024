@@ -30,6 +30,8 @@ Google Cloud <br />
     Google Maps API <br />
 Node.JS <br />
 React (TypeScript) <br />
+Roboflow <br />
+detectron2
 
 
 
