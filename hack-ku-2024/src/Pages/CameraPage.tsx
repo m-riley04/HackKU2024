@@ -51,7 +51,7 @@ async function getObjectMaterial_GPT(uri: string) {
 function CameraPage() {
     const [imageData, setImageData] = useState('');
     const [trashCategory, setTrashCategory] = useState<string | null | undefined>("");
-    const [loading, setLoading] = useState(false);
+    const [processing, setProcessing] = useState(false);
 
     /**
      * Handles when the used clicks on retake
@@ -66,39 +66,36 @@ function CameraPage() {
      */
     async function handleImageChosen(uri: string) {
         // Show a loading screen
-        setLoading(true);
+        setProcessing(true);
     
         // Process the image and get the object's material as a string
         try {
-        setTrashCategory(await getObjectMaterial_GPT(uri));
+            setTrashCategory(await getObjectMaterial_GPT(uri));
         } catch (error) {
-        console.error(error);
+            console.error(error);
         } finally {
-        // Check the category
-        switch (trashCategory) {
-            case "plastic":
-            break;
-            case "paper":
-            break;
-            case "metal":
-            break;
-            case "glass":
-            break;
-            case "styrofoam":
-            break;
-            case "other":
-            break;
-    
-            default:
-            //setTrashCategory(null);
-            break;
-        }
+            // Check the category
+            switch (trashCategory) {
+                case "plastic":
+                    break;
+                case "paper":
+                    break;
+                case "metal":
+                    break;
+                case "glass":
+                    break;
+                case "styrofoam":
+                    break;
+                case "other":
+                    break;
         
-        //
-        console.log(trashCategory)
-    
-        setLoading(false);
-        setImageData(''); // Clear the image data
+                default:
+                    //setTrashCategory(null);
+                    break;
+            }
+            
+            setProcessing(false); // Hides the loading screen
+            setImageData(''); // Clear the image data
         }
     }
 
@@ -111,7 +108,8 @@ function CameraPage() {
         setImageData(dataUri);
     }
 
-    if (loading) {
+    // Processing/loading screen
+    if (processing) {
         return (
         <>
             <p>Processing image data...</p>
@@ -119,7 +117,6 @@ function CameraPage() {
         );
     }
 
-    // Check if the camera is open
     return (
         <>
         <div>
