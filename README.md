@@ -7,13 +7,9 @@
 ## ${\color{lightpink}Purpose}$  
 Glam up your community by picking up litter through this competative and educational webapp. Users will be able to upload locations of trash which will challenge others to go and pick it up, racking them up points with every piece collected and properly disposed of. Once the trash is disposed of users will also have facts avaliable to them about the liter they are cleaning, allowing them to gain a wide range of knowledge about how our human activies affect the world we live in. 
 
-## ${\color{lightpink}How \space to \space use}$  
-1 - 
-
-
 ## ${\color{lightpink}Specifics}$
 **Frameworks** <br />
-Node 21.5.0 <br />
+Node 21.5.0 <br /> 
 **Dependencies** <br />
 react ^18.2.0 <br />
 react-dom ^18.2.0 <br />
