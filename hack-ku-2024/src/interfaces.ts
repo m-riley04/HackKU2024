@@ -7,6 +7,7 @@ export interface User {
     xp: number
     nextLevelXP: number
     level: number
+    trashCollected: number
   }
   
   /**
