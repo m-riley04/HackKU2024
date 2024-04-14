@@ -3,8 +3,12 @@ import Leaderboard from "../Leaderboard/Leaderboard";
 import { User } from "../interfaces";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 
-//const APP_URL = "https://hackku2024-lz3sc7ogqa-uc.a.run.app";
-
+/**
+ * Sorting method for the leaderboard
+ * @param a a user
+ * @param b another user
+ * @returns the difference between the trash collected of b and a
+ */
 function sortByTrashCollected(a: User, b: User) {
     return b.trashCollected - a.trashCollected;
 }
@@ -12,6 +16,9 @@ function sortByTrashCollected(a: User, b: User) {
 function LeaderboardPage() {
     const [users, setUsers] = useState<User[] | undefined>(undefined);
     
+    /**
+     * Handles the setting of the user list for the leaderboard
+     */
     async function handleSetUsers() {
         await fetch(`${window.location.origin}/api/users`)
           .then((res) => res.json())
@@ -31,6 +38,7 @@ function LeaderboardPage() {
             handleSetUsers();
         }
     }, [users])
+
 
     if (!users) return (
         <>
