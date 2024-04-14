@@ -10,18 +10,20 @@ app.listen(port, () => {
     console.log("Listening on port " + port);
 });
 
-//================ TEMP DATA
+//================ PLACEHOLDER DATA
 const users = [
-    {id: 1, name: "Riley", xp: 10, nextLevelXP: 20, level: 2},
-    {id: 2, name: "Ryland", xp: 5, nextLevelXP: 10, level: 1},
-    {id: 3, name: "Averi", xp: 2, nextLevelXP: 300, level: 5},
-    {id: 4, name: "Aryen", xp: 0, nextLevelXP: 50, level: 3},
+    {id: 0, name: "John", xp: 0, nextLevelXP: 10, level: 1, trashCollected: 0},
+    {id: 1, name: "Riley", xp: 10, nextLevelXP: 20, level: 2, trashCollected: 100},
+    {id: 2, name: "Ryland", xp: 5, nextLevelXP: 10, level: 1, trashCollected: 87},
+    {id: 3, name: "Averi", xp: 2, nextLevelXP: 300, level: 5, trashCollected: 169},
+    {id: 4, name: "Aryen", xp: 0, nextLevelXP: 50, level: 3, trashCollected: 123},
 ];
 
 const pins = [
-    {id: 1, name: "Trash 1", latitude: 0, longitude: 0},
-    {id: 2, name: "Trash 2", latitude: -200, longitude: 100}
-]
+    {id: 0, name: "Trash 1", latitude: 0, longitude: 0},
+    {id: 1, name: "Trash 2", latitude: -200, longitude: 100}
+];
+
 const facts = [
     {id: 0, material: "glass", body: "Beaches are being depleted of sand, but recycled glass can help replenish them."},
     {id: 1, material: "glass", body: "One ton of recycled glass saves around 315 kilograms of carbon dioxide emission."},
