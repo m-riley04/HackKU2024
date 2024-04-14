@@ -1,30 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Minimap.scss";
 
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { Map, APIProvider } from "@vis.gl/react-google-maps";
 
 import CustomMarker from "./Marker";
 
 function Minimap() {
   const [location, setLocation] = useState<GeolocationCoordinates>();
+  const failure = <div className="map" />;
 
   if (!navigator.geolocation) {
-    return;
+    return failure;
   }
 
-  navigator.geolocation.watchPosition(
-    (position: GeolocationPosition) => {
-      setLocation(position.coords)
-    },
-    () => {},
-  );
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position: GeolocationPosition) => {
+        setLocation(position.coords);
+      },
+      () => {},
+    );
+  }, []);
 
   if (!location) {
-    return (
-      <div className="map_error">
-        <p> Failed to get geolocation data </p>
-      </div>
-    );
+    return failure;
   }
 
   return (
@@ -33,19 +32,13 @@ function Minimap() {
         <Map
           mapId="efc6d932e1c1638a"
           defaultCenter={{ lat: location.latitude, lng: location.longitude }}
-          defaultZoom={15}
-          gestureHandling={"greedy"}
           disableDefaultUI={true}
+          gestureHandling={"greedy"}
+          defaultZoom={15}
         >
-          <CustomMarker
-            name="test"
-            id={0}
-            latitude={location.latitude}
-            longitude={location.longitude}
-            image="./images/leep.jpg"
-          />
+          <CustomMarker id={0} />
+          <CustomMarker id={1} />
         </Map>
-        <Minimap/>
       </APIProvider>
     </div>
   );
