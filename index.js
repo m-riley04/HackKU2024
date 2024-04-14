@@ -98,12 +98,13 @@ app.get(`/api/facts/:material`, (req, res) => {
     const material = req.params.material;
     const materialFacts = getMaterialFacts(material);
     if (!materialFacts) {
-        res.status(404).send({ error: `Pin ${material} not found`})
+        res.status(404).send({ error: `${material} not found`})
     }
     else {
         res.send({ data: materialFacts })
     }
 })
+
 //================ SERVER FUNCTIONS
 function getUser(id) {
     return users.find(p => p.id == id);
@@ -114,5 +115,7 @@ function getPin(id) {
 }
 
 function getMaterialFacts(material) {
-    return facts.filter(f => f.material == material);
+    const filtered = facts.filter(f => f.material == material);
+    if (filtered.length > 0) return filtered;
+    return facts.filter(f => f.material == "other")
 }
