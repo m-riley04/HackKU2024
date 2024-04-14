@@ -35,6 +35,24 @@ app.get(`/api/users/:id`, (req, res) => {
     }
 })
 
+app.get(`/api/users`, (req, res) => {
+    if (!users) {
+        res.status(404).send({ error: `Users not found`})
+    }
+    else {
+        res.send({ data: users })
+    }
+})
+
+app.get(`/api/pins`, (req, res) => {
+    if (!users) {
+        res.status(404).send({ error: `Pins not found`})
+    }
+    else {
+        res.send({ data: pins })
+    }
+})
+
 app.get(`/api/pins/:id`, (req, res) => {
     const id = req.params.id;
     const pin = getPin(id);
