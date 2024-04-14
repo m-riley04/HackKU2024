@@ -21,7 +21,9 @@ async function getObjectMaterial_GPT(uri: string) {
       - Plastic
       - Metal
       - Glass
-      - Other
+      - Styrofoam
+      - Ceramic
+      If the user takes a picture of something that is not recyclable or it is just trash, you must reply with "Other"
       If the user takes a picture of something that is not trash, you must reply with "None". 
       If something goes wrong during image processing, you must reply with "Error".
       Please give your best guess.`;
