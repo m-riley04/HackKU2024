@@ -6,8 +6,6 @@ import { User } from "../interfaces";
 import { APIProvider } from "@vis.gl/react-google-maps";
 import "react-html5-camera-photo/build/css/index.css";
 
-const APP_URL = "https://hackku2024-lz3sc7ogqa-uc.a.run.app";
-
 function HomePage() {
   const [user, setUser] = useState<User | undefined>(undefined);
 
@@ -16,7 +14,7 @@ function HomePage() {
    * @param id a user Id
    */
   async function handleSetUser(id: number) {
-    await fetch(`${APP_URL}/api/users/${id}`)
+    await fetch(`${window.location.origin}/api/users/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setUser(data.data);
