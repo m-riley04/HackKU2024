@@ -53,6 +53,14 @@ async function wipeData(datasetId, tableId) {
     }
 }
 
+/**
+ * Inserts a single row into a specific BigQuery table.
+ * 
+ * @param {string} datasetId - The ID of the dataset
+ * @param {string} tableId - The ID of the table
+ * @param {object} conditions - The conditions to search for
+ * @param {object} updates - Object to replace/update the data with
+ */
 async function updateData(datasetId, tableId, conditions, updates) {
     const query = `
         UPDATE \`${bigquery.projectId}.${datasetId}.${tableId}\`
