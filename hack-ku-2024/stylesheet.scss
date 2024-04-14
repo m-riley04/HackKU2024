@@ -1,5 +1,6 @@
 $bg-primary: #1a1a26;
 $text-primary: #e3e3e3;
+$button-bg-primary: #0e0e14;
 
 :root {
   background-color: $bg-primary;
@@ -38,7 +39,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: red;
+  background-color: $button-bg-primary;
   cursor: pointer;
   transition: border-color 0.25s;
 }
