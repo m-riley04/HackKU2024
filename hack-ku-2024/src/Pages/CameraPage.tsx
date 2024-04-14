@@ -50,6 +50,13 @@ async function getObjectMaterial_GPT(uri: string) {
       throw new Error('No response from AI model');
     }
 }
+
+/**
+ * 
+ * @param userId 
+ * @param userData 
+ * @returns 
+ */
 async function updateUser(userId: number, userData: User) {
     try {
         const response = await fetch(`${window.location.origin}/api/users/${userId}`, {
@@ -73,12 +80,30 @@ async function updateUser(userId: number, userData: User) {
     }
 }
 
-async function addXP(user: User, xp: number) {
+/**
+ * Adds an amount to the user's total trash collection count
+ * @param user the user that will have their stats updated
+ * @param numOfTrash the number of pieces of trash that the user cleaned up
+ */
+async function addTrashCollected(user: User, numOfTrash: number) {
+    user.trashCollected += numOfTrash;
+}
 
+/**
+ * Adds an amount of xp to a user
+ * @param user the user that will gain xp
+ * @param xp the amount of xp to be gained
+ */
+async function addXP(user: User, xp: number) {
     user.xp += xp;
     await checkUserXP(user);
 }
 
+/**
+ * Checks the user's current XP to see if they are ready to level up.
+ * If they are, increments their level and resets their xp (accounting for rollover).
+ * @param user the user whose xp will be checked
+ */
 async function checkUserXP(user: User) {
     // Check if the XP is above the user's next XP
     if (user.xp >= user.nextLevelXP) {
@@ -194,7 +219,9 @@ function CameraPage({ user } : { user: User}) {
                 xpToAdd = 1;
                 break;
         }
-
+        
+        const numOfTrash = 1;
+        addTrashCollected(user, numOfTrash);
         if (xpToAdd > 0) addXP(user, xpToAdd);
 
         setProcessing(false); // Hides the loading screen
