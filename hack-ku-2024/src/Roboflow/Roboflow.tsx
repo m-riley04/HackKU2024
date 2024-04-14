@@ -1,3 +1,4 @@
+/*
 import { useRef, useEffect, useState } from "react";
 
 const PUBLISHABLE_ROBOFLOW_API_KEY = "YOUR_PUBLISHABLE_ROBOFLOW_API_KEY";
@@ -47,4 +48,4 @@ const Roboflow = (props) => {
   );
 };
 
-export default Roboflow;
+export default Roboflow;*/
