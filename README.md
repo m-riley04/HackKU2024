@@ -12,7 +12,20 @@ Glam up your community by picking up litter through this competative and educati
 
 
 ## ${\color{lightpink}Specifics}$
-
+Frameworks
+Node 21.5.0
+Dependencies
+react ^18.2.0
+react-dom ^18.2.0
+react-bootstrap ^2.10.2
+express ^4.19.2
+react-geolocated ^4.1.2
+react-html5-camera-photo ^1.5.11
+sass ^1.75.0
+bootstrap ^5.3.3
+react-google-maps ^0.8.3
+openai ^4.33.1
+bigquery ^0.0.6
 ## ${\color{lightpink}Upload \space instructions}$
 
 ## ${\color{lightpink}Technology \space used}$
@@ -21,3 +34,7 @@ Google Cloud
   - Google Maps API
 Node.JS
 React (TypeScript)
+
+
+
+
