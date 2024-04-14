@@ -48,7 +48,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div style={{height: "75vh"}}>
+      <div>
         <Routes>
           <Route index element={<HomePage user={user}/>}/>
           <Route path="camera" element={<CameraPage user={user}/>}/>

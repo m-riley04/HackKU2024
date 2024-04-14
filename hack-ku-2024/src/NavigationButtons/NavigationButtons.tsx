@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
 import "./NavigationButtons.scss"
-import leaderboardIcon from "../../images/leaderboard.png"
-import cameraIcon from "../../images/camera.png"
-import homeIcon from "../../images/home.png"
+import leaderboardIcon from "../../images/leaderboard.svg"
+import cameraIcon from "../../images/camera.svg"
+import homeIcon from "../../images/home.svg"
 
 function NavigationButtons() {
     const navigate = useNavigate();

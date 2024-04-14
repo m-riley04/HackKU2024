@@ -7,10 +7,10 @@ import CustomMarker from "./Marker";
 
 function Minimap() {
   const [location, setLocation] = useState<GeolocationCoordinates>();
-  // const map = useMap();
+  const failure = <div className="map" />;
 
   if (!navigator.geolocation) {
-    return;
+    return failure;
   }
 
   useEffect(() => {
@@ -23,11 +23,7 @@ function Minimap() {
   }, []);
 
   if (!location) {
-    return (
-      <div className="map_error">
-        <p> Failed to get geolocation data </p>
-      </div>
-    );
+    return failure;
   }
 
   return (
@@ -36,11 +32,11 @@ function Minimap() {
         <Map
           mapId="efc6d932e1c1638a"
           defaultCenter={{ lat: location.latitude, lng: location.longitude }}
-          defaultZoom={15}
-          gestureHandling={"greedy"}
           disableDefaultUI={true}
+          gestureHandling={"greedy"}
+          defaultZoom={15}
         >
-          <CustomMarker id={2} />
+          <CustomMarker id={0} />
           <CustomMarker id={1} />
         </Map>
       </APIProvider>

@@ -1,32 +1,35 @@
 .buttonContainer {
-    padding: 10px;
-    width: 100%;
-    height: 20%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: auto;
+  padding: 10px;
+  width: 100%;
+  height: 12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 button {
-    width: 15vw;
-    height: 15vw;
-    border-radius: 15vw;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-    padding: 15px;
+  width: 15vw;
+  height: 15vw;
+  border-radius: 15vw;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.buttonContainer button {
+  background: #7a997e;
+  border-radius: 25vw;
 }
 
 .cameraButton {
-    width: 25vw;
-    height: 25vw;
-    border-radius: 25vw;
+  width: 20vw;
+  height: 20vw;
+  margin: 8vw 8vw;
 }
 
 img {
-    flex-shrink: 0;
-    min-width: 80%;
-    min-height: 80%;
+  flex-shrink: 0;
+  min-width: 80%;
+  min-height: 80%;
 }
