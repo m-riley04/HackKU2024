@@ -123,11 +123,11 @@ function CameraPage() {
             (imageData)
             // If an image was taken...
                 ? 
-                <>
-                <img src={imageData}/>
-                <button onClick={handleRetake}>Retake</button>
-                <button onClick={() => handleImageChosen(imageData)}>Confirm</button>
-                </>
+                <div className="picture-preview-container">
+                    <img src={imageData}/>
+                    <button onClick={handleRetake}>Retake</button>
+                    <button onClick={() => handleImageChosen(imageData)}>Confirm</button>
+                </div>
             // If there isn't an image yet...
                 : <Camera onTakePhoto={handleTakePhoto} idealFacingMode={FACING_MODES.ENVIRONMENT}/> 
             }
