@@ -19,3 +19,9 @@ export interface User {
     latitude: number
     longitude: number
   }
+
+  export interface Fact {
+    id: number
+    material: string
+    body: string
+  }
