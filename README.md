@@ -12,11 +12,11 @@ Glam up your community by picking up litter through this competative and educati
 
 
 ## ${\color{lightpink}Specifics}$
-Frameworks__
-Node 21.5.0__
-Dependencies__
-react ^18.2.0__
-react-dom ^18.2.0__
+Frameworks <br />
+Node 21.5.0 <br />
+Dependencies <br />
+react ^18.2.0 <br />
+react-dom ^18.2.0
 react-bootstrap ^2.10.2
 express ^4.19.2
 react-geolocated ^4.1.2
