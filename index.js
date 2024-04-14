@@ -10,6 +10,212 @@ app.listen(port, () => {
     console.log("Listening on port " + port);
 });
 
+const PROJECT_NAME = "hackku2024";
+const DATASET_NAME = "hackku_dataset";
+
+const { BigQuery } = require('@google-cloud/bigquery');
+const bigquery = new BigQuery({
+    projectId: PROJECT_NAME,
+    keyFilename: "./bigquerycreds.json"
+});
+
+/**
+ * Inserts all rows from a specific BigQuery table.
+ * 
+ * @param {string} datasetId - The ID of the dataset.
+ * @param {string} tableId - The ID of the table.
+ * @param {object[]} rows - The rows to insert 
+ */
+
+async function insertData(datasetId, tableId, rows) {
+    try {
+        const dataset = bigquery.dataset(datasetId);
+        const table = dataset.table(tableId);
+        const [insertResponse] = await table.insert(rows);
+        console.log('Insert response:', insertResponse);
+    } catch (error) {
+        console.error('ERROR:', error);
+    }
+}
+
+/**
+ * Deletes all rows from a specific BigQuery table.
+ * 
+ * @param {string} datasetId - The ID of the dataset.
+ * @param {string} tableId - The ID of the table.
+ */
+async function wipeData(datasetId, tableId) {
+    const query = `DELETE FROM \`${bigquery.projectId}.${datasetId}.${tableId}\` WHERE TRUE`;
+    try {
+        const [job] = await bigquery.createQueryJob({ query });
+        await job.getQueryResults();  // Wait for the query to finish
+        console.log(`All rows have been deleted from ${tableId}.`);
+    } catch (error) {
+        console.error(`Failed to delete data from ${tableId}:`, error);
+        throw error;
+    }
+}
+
+async function updateData(datasetId, tableId, conditions, updates) {
+    const query = `
+        UPDATE \`${bigquery.projectId}.${datasetId}.${tableId}\`
+        SET ${Object.keys(updates).map(key => `${key} = @${key}`).join(', ')}
+        WHERE ${Object.keys(conditions).map(key => `${key} = @${key}`).join(' AND ')}`;
+
+    const params = {...updates, ...conditions};
+
+    const options = {
+        query: query,
+        location: 'US',  // This should be set to your dataset's location
+        params: params
+    };
+
+    try {
+        const [job] = await bigquery.createQueryJob(options);
+        await job.getQueryResults();
+        console.log(`Update successful in table ${tableId}`);
+    } catch (error) {
+        console.error(`Failed to update data in ${tableId}:`, error);
+        throw error;
+    }
+}
+
+//================ API CALLS
+//==== GET
+app.get(`/api/users/:id`, async (req, res) => {
+    const id = parseInt(req.params.id);
+    const query = `SELECT * FROM \`${PROJECT_NAME}.${DATASET_NAME}.users\` WHERE id = @id`;
+    const options = {
+        query: query,
+        params: {id: id},
+        location: 'US',
+    };
+
+    try {
+        const [rows] = await bigquery.query(options);
+        if (rows.length === 0) {
+            res.status(404).send({ error: `User ${id} not found` });
+        } else {
+            res.send({ data: rows[0] });
+        }
+    } catch (error) {
+        console.error('ERROR:', error);
+        res.status(500).send({ error: 'Failed to fetch user from BigQuery' });
+    }
+});
+
+
+app.get(`/api/users`, async (req, res) => {
+    try {
+        const query = `SELECT * FROM \`${PROJECT_NAME}.${DATASET_NAME}.users\``;
+        const options = {
+            query: query,
+            location: 'US',  // Set this to your dataset's location
+        };
+
+        const [rows] = await bigquery.query(options);
+        res.status(200).json({ data: rows });
+    } catch (error) {
+        console.error('ERROR:', error);
+        res.status(500).send({ error: 'Failed to fetch users from BigQuery' });
+    }
+});
+
+app.get(`/api/pins`, async (req, res) => {
+    const query = `SELECT * FROM \`${PROJECT_NAME}.${DATASET_NAME}.pins\``;
+    const options = {
+        query: query,
+        location: 'US',
+    };
+
+    try {
+        const [rows] = await bigquery.query(options);
+        res.status(200).json({ data: rows });
+    } catch (error) {
+        console.error('ERROR:', error);
+        res.status(500).send({ error: 'Failed to fetch pins from BigQuery' });
+    }
+});
+
+app.get(`/api/pins/:id`, async (req, res) => {
+    const id = parseInt(req.params.id);
+    const query = `SELECT * FROM \`${PROJECT_NAME}.${DATASET_NAME}.pins\` WHERE id = @id`;
+    const options = {
+        query: query,
+        params: {id: id},
+        location: 'US',
+    };
+
+    try {
+        const [rows] = await bigquery.query(options);
+        if (rows.length === 0) {
+            res.status(404).send({ error: `Pin ${id} not found` });
+        } else {
+            res.send({ data: rows[0] });
+        }
+    } catch (error) {
+        console.error('ERROR:', error);
+        res.status(500).send({ error: 'Failed to fetch pin from BigQuery' });
+    }
+});
+
+app.get(`/api/facts`, async (req, res) => {
+    const query = `SELECT * FROM \`${PROJECT_NAME}.${DATASET_NAME}.facts\``;
+    const options = {
+        query: query,
+        location: 'US',
+    };
+
+    try {
+        const [rows] = await bigquery.query(options);
+        res.status(200).json({ data: rows });
+    } catch (error) {
+        console.error('ERROR:', error);
+        res.status(500).send({ error: 'Failed to fetch facts from BigQuery' });
+    }
+});
+
+app.get(`/api/facts/:material`, async (req, res) => {
+    const material = req.params.material;
+    const query = `SELECT * FROM \`${PROJECT_NAME}.${DATASET_NAME}.facts\` WHERE material = @material`;
+    const options = {
+        query: query,
+        params: {material: material},
+        location: 'US',
+    };
+
+    try {
+        const [rows] = await bigquery.query(options);
+        if (rows.length === 0) {
+            res.status(404).send({ error: `${material} facts not found` });
+        } else {
+            res.send({ data: rows });
+        }
+    } catch (error) {
+        console.error('ERROR:', error);
+        res.status(500).send({ error: 'Failed to fetch facts from BigQuery' });
+    }
+});
+//====== PUT
+/**
+ * Update user data in BigQuery.
+ */
+app.put('/api/users/:id', async (req, res) => {
+    const id = parseInt(req.params.id);  // ID from the URL
+    const updates = req.body;  // Data passed in the body of the request
+
+    // Construct the conditions to match the user
+    const conditions = { id: id };
+
+    try {
+        await updateData(DATASET_NAME, 'users', conditions, updates);
+        res.send({ success: true, message: 'User updated successfully.' });
+    } catch (error) {
+        console.error('Failed to update user:', error);
+        res.status(500).send({ error: 'Failed to update user data in BigQuery.' });
+    }
+});
+
 //================ PLACEHOLDER DATA
 const users = [
     {id: 0, name: "John", xp: 0, nextLevelXP: 10, level: 1, trashCollected: 0},
@@ -43,79 +249,3 @@ const facts = [
     {id: 15, material: "other", body: "Litter is set on fire to easy dispose of it, this leads to toxins that contribute to climate change."},
     {id: 16, material: "other", body: "The US is the number one country for litter."},
 ];
-
-//================ API CALLS
-app.get(`/api/users/:id`, (req, res) => {
-    const id = req.params.id;
-    const user = getUser(id);
-    if (!user) {
-        res.status(404).send({ error: `User ${id} not found`})
-    }
-    else {
-        res.send({ data: user })
-    }
-})
-
-app.get(`/api/users`, (req, res) => {
-    if (!users) {
-        res.status(404).send({ error: `Users not found`})
-    }
-    else {
-        res.send({ data: users })
-    }
-})
-
-app.get(`/api/pins`, (req, res) => {
-    if (!users) {
-        res.status(404).send({ error: `Pins not found`})
-    }
-    else {
-        res.send({ data: pins })
-    }
-})
-
-app.get(`/api/pins/:id`, (req, res) => {
-    const id = req.params.id;
-    const pin = getPin(id);
-    if (!pin) {
-        res.status(404).send({ error: `Pin ${id} not found`})
-    }
-    else {
-        res.send({ data: pin })
-    }
-})
-
-app.get(`/api/facts`, (req, res) => {
-    if (!facts) {
-            res.status(404).send({ error: `Facts not found`})
-    }
-    else {
-        res.send({ data: facts })
-    }
-})
-
-app.get(`/api/facts/:material`, (req, res) => {
-    const material = req.params.material;
-    const materialFacts = getMaterialFacts(material);
-    if (!materialFacts) {
-        res.status(404).send({ error: `${material} not found`})
-    }
-    else {
-        res.send({ data: materialFacts })
-    }
-})
-
-//================ SERVER FUNCTIONS
-function getUser(id) {
-    return users.find(p => p.id == id);
-}
-
-function getPin(id) {
-    return pins.find(p => p.id == id);
-}
-
-function getMaterialFacts(material) {
-    const filtered = facts.filter(f => f.material == material);
-    if (filtered.length > 0) return filtered;
-    return facts.filter(f => f.material == "other")
-}
