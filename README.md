@@ -12,9 +12,9 @@ Glam up your community by picking up litter through this competative and educati
 
 
 ## ${\color{lightpink}Specifics}$
-Frameworks <br />
+**Frameworks** <br />
 Node 21.5.0 <br />
-Dependencies <br />
+**Dependencies** <br />
 react ^18.2.0 <br />
 react-dom ^18.2.0 <br />
 react-bootstrap ^2.10.2 <br />
