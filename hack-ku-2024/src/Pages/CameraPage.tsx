@@ -169,8 +169,7 @@ function CameraPage({ user } : { user: User}) {
         }
 
         // Give the user an experience point based on the material
-        let xpToAdd = 1;
-
+        let xpToAdd = 0;
         switch (material) {
             case "plastic":
                 xpToAdd = 5;
@@ -187,12 +186,16 @@ function CameraPage({ user } : { user: User}) {
             case "paper":
                 xpToAdd = 1;
                 break;
+            case "":
+                break;
+            case "none":
+                break;
             default:
                 xpToAdd = 1;
                 break;
         }
-        
-        addXP(user, xpToAdd);
+
+        if (xpToAdd > 0) addXP(user, xpToAdd);
     }, [material])
 
     // Processing/loading screen
