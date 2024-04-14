@@ -1,14 +1,14 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.scss'
-import HomePage from './Pages/HomePage'
-import CameraPage from './Pages/CameraPage';
-import NotFoundPage from './Pages/NotFoundPage';
-import NavigationButtons from './NavigationButtons/NavigationButtons';
-import LeaderboardPage from './Pages/LeaderboardPage';
-import { useEffect, useState } from 'react';
-import { User } from './interfaces';
-import { Button, Container, Form } from 'react-bootstrap';
-import LoadingIcon from './LoadingIcon/LoadingIcon';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.scss";
+import HomePage from "./Pages/HomePage";
+import CameraPage from "./Pages/CameraPage";
+import NotFoundPage from "./Pages/NotFoundPage";
+import NavigationButtons from "./NavigationButtons/NavigationButtons";
+import LeaderboardPage from "./Pages/LeaderboardPage";
+import { useEffect, useState } from "react";
+import { User } from "./interfaces";
+import { Button, Container, Form } from "react-bootstrap";
+import LoadingIcon from "./LoadingIcon/LoadingIcon";
 
 function App() {
   const [user, setUser] = useState<User | undefined>(undefined);
@@ -49,7 +49,7 @@ function App() {
 
   if (!loggedIn) {
     return (
-      <Container style={{alignItems: "center", marginTop: "35vh"}}>
+      <Container style={{ alignItems: "center", marginTop: "35vh" }}>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Username</Form.Label>
@@ -60,10 +60,21 @@ function App() {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
-          <Button onClick={handleLogIn} style={{width: "100px", backgroundColor: "#7a997e", color: "#222"}}> Log In </Button>
+          <Button
+            onClick={handleLogIn}
+            style={{
+              width: "100px",
+              backgroundColor: "#7a997e",
+              color: "#222",
+              "font-size": "1.5em",
+            }}
+          >
+            {" "}
+            Log In{" "}
+          </Button>
         </Form>
       </Container>
-    )
+    );
   }
 
   if (!user) {
@@ -79,13 +90,13 @@ function App() {
     <BrowserRouter>
       <div>
         <Routes>
-          <Route index element={<HomePage user={user}/>}/>
-          <Route path="camera" element={<CameraPage user={user}/>}/>
-          <Route path="leaderboard" element={<LeaderboardPage/>}/>
-          <Route path="*" element={<NotFoundPage/>}/>
+          <Route index element={<HomePage user={user} />} />
+          <Route path="camera" element={<CameraPage user={user} />} />
+          <Route path="leaderboard" element={<LeaderboardPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
-      <NavigationButtons/>
+      <NavigationButtons />
     </BrowserRouter>
   );
 }
