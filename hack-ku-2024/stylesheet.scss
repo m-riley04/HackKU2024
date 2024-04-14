@@ -1,12 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
 
 $bg-primary: #aabda0;
-$text-primary: #e3e3e3;
+$text-primary: #222;
 $button-bg-primary: #0e0e14;
 
 :root {
   background-color: $bg-primary;
   color: $text-primary;
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
 body {
