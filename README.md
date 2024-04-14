@@ -5,7 +5,6 @@ A HackKU hackathon entry for the theme track "Social Good"
 
 # Technical Specifications
 * Node 21.5.0
-* React 5.2.3
 
 # Dependencies
 * react ^18.2.0
