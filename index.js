@@ -83,11 +83,34 @@ app.get(`/api/pins/:id`, (req, res) => {
     }
 })
 
+app.get(`/api/facts`, (req, res) => {
+    if (!facts) {
+            res.status(404).send({ error: `Facts not found`})
+    }
+    else {
+        res.send({ data: facts })
+    }
+})
+
+app.get(`/api/facts/:material`, (req, res) => {
+    const material = req.params.material;
+    const materialFacts = getMaterialFacts(material);
+    if (!materialFacts) {
+        res.status(404).send({ error: `Pin ${material} not found`})
+    }
+    else {
+        res.send({ data: materialFacts })
+    }
+})
 //================ SERVER FUNCTIONS
 function getUser(id) {
     return users.find(p => p.id == id);
 }
 
 function getPin(id) {
-    return pins.find(p => p.id == id)
+    return pins.find(p => p.id == id);
+}
+
+function getMaterialFacts(material) {
+    return facts.filter(f => f.material == material);
 }
