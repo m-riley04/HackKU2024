@@ -6,13 +6,14 @@ import ExperienceBar from "./ExperienceBar";
 import { User } from "../interfaces";
 import "bootstrap/dist/css/bootstrap.css";
 import "./UserStats.scss";
+import avatarImage from "../../images/avatar.png"
 
 function UserStats({ user }: { user?: User }) {
   return (
     <Container className="userstats">
       <Row className="">
         <Col className="avatar">
-          <Image src="../images/avatar.png" roundedCircle />
+          <Image src={avatarImage} roundedCircle />
         </Col>
 
         <Col className="levelcol">
