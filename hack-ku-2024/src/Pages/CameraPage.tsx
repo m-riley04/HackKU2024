@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import { useState } from "react";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
+import { Fact } from "../interfaces";
 
 
 const openai = new OpenAI({
@@ -51,8 +52,9 @@ async function getObjectMaterial_GPT(uri: string) {
   
 function CameraPage() {
     const [imageData, setImageData] = useState('');
-    const [trashCategory, setTrashCategory] = useState<string | null | undefined>("");
+    const [material, setMaterial] = useState<string | null | undefined>("");
     const [processing, setProcessing] = useState(false);
+    const [fact, setFact] = useState<Fact | undefined>();
 
     /**
      * Handles when the used clicks on retake
@@ -71,28 +73,35 @@ function CameraPage() {
     
         // Process the image and get the object's material as a string
         try {
-            setTrashCategory(await getObjectMaterial_GPT(uri));
+            const mat = await getObjectMaterial_GPT(uri)
+            setMaterial(mat);
+
+            await fetch(`${window.location.origin}/api/facts/${mat}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    const _facts = data.data;
+                    const _item = _facts[Math.floor(Math.random()*_facts.length)]
+                    console.log(_item)
+                    setFact(_item)
+                }) // Set the user state
+                .catch((e) => {
+                    console.error("Failed to fetch user:", e);
+                });
         } catch (error) {
             console.error(error);
         } finally {
-            // Check the category
-            switch (trashCategory) {
-                case "plastic":
-                    break;
-                case "paper":
-                    break;
-                case "metal":
-                    break;
-                case "glass":
-                    break;
-                case "styrofoam":
-                    break;
-                case "other":
-                    break;
-        
-                default:
-                    //setTrashCategory(null);
-                    break;
+            const recyclable = ["plastic", "paper", "metal", "glass"]
+            const nonrecyclable = ["styrofoam", "ceramic"]
+
+            if (nonrecyclable.includes(String(material))) { 
+                // Material is not recyclable
+                
+            } else if (material != "" && recyclable.includes(String(material))) {
+                // Material is reyclable
+
+            } else {
+                // Material is empty
+
             }
             
             setProcessing(false); // Hides the loading screen
@@ -125,17 +134,20 @@ function CameraPage() {
             (imageData)
             // If an image was taken...
                 ? 
-                <div className="picture-preview-container">
-                    <img src={imageData}/>
+                <>
+                    <div className="picture-preview-container">
+                        <img src={imageData}/>
+                    </div>
                     <button onClick={handleRetake}>Retake</button>
                     <button onClick={() => handleImageChosen(imageData)}>Confirm</button>
-                </div>
+                </>
             // If there isn't an image yet...
                 : <Camera onTakePhoto={handleTakePhoto} idealFacingMode={FACING_MODES.ENVIRONMENT}/> 
             }
         </div>
 
-        {(trashCategory) ? <><h3>{trashCategory}</h3></> : <></>}
+        {(material) ? <><h3>{material}</h3></> : <></>}
+        {(fact) ? <><p>{fact.body}</p></> : <></>}
         </>
     );
 }
