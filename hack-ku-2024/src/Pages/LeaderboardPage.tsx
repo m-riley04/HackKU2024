@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Leaderboard from "../Leaderboard/Leaderboard";
 import { User } from "../interfaces";
+import LoadingIcon from "../LoadingIcon/LoadingIcon";
 
 //const APP_URL = "https://hackku2024-lz3sc7ogqa-uc.a.run.app";
 
@@ -34,6 +35,7 @@ function LeaderboardPage() {
     if (!users) return (
         <>
             <p>Loading users...</p>
+            <LoadingIcon></LoadingIcon>
         </>
     )
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
 import { Fact, User } from "../interfaces";
 import ScanResults from "../ScanResults/ScanResults";
+import LoadingIcon from "../LoadingIcon/LoadingIcon";
 
 
 const openai = new OpenAI({
@@ -232,6 +233,7 @@ function CameraPage({ user } : { user: User}) {
         return (
             <div style={{height: "78vh"}}>
                 <p>Processing image data...</p>
+                <LoadingIcon></LoadingIcon>
             </div>
         );
     }
