@@ -7,6 +7,13 @@ const openai = new OpenAI({
     apiKey: import.meta.env.VITE_OPENAI_API_KEY, dangerouslyAllowBrowser: true
 });
 
+/**
+ * Processes an image using GPT Vision to determine the material that it is made out of. The possible materials are paper, plastic, metal, glass, styrofoam, and other.
+ * @param uri a public image uri
+ * @returns {string} a string that is a single-word defining the material
+ * 
+ * @throws {Error} if the API/GPT returns nothing, or if it returns "Error" as a string
+ */
 async function getObjectMaterial_GPT(uri: string) {
     const PROMPT = `You are a tool that's sole purpose is to categorize images of trash. When a user uploads an image of trash, 
       you must and will only reply in one word from the word list. The categories/words that you are able to respond with are the following:
