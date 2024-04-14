@@ -21,13 +21,13 @@ function ScanResults({ material, fact, recyclable } : { material?: string, fact?
 
     return(
         <Container className="material-results">
-            <Row>
+            <Row style={{fontSize: ".8em"}}>
                 <Col><img src={imagePath} width="75px" height="75px"></img></Col>
                 <Col>Material: <b>{material}</b></Col>
-                <Col>Recyclable: {(recyclable == true) ? <b>Yes</b> : <b>False</b>}</Col>
+                <Col>Recyclable: {(recyclable == true) ? <b>Yes</b> : <b>No</b>}</Col>
             </Row>
             <Row>
-                <Col><h5>Fact: {fact}</h5></Col>
+                <Col><h6>Fact: {fact}</h6></Col>
             </Row>
         </Container>
     )

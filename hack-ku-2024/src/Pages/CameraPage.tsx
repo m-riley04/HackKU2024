@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { useEffect, useState } from "react";
 import Camera, { FACING_MODES } from "react-html5-camera-photo";
-import { Fact, User } from "../interfaces";
+import { Fact, Pin, User } from "../interfaces";
 import ScanResults from "../ScanResults/ScanResults";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 
@@ -53,7 +53,7 @@ async function getObjectMaterial_GPT(uri: string) {
 }
 
 /**
- * 
+ * Updates the user
  * @param userId 
  * @param userData 
  * @returns 
@@ -78,6 +78,35 @@ async function updateUser(userId: number, userData: User) {
     } catch (error) {
         console.error('Failed to update user:', error);
         throw new Error('Failed to update user');
+    }
+}
+
+/**
+ * Adds a new pin to the database via a POST request.
+ * 
+ * @param {Pin} pin - The pin data to add.
+ */
+async function addPin(pin: Pin) {
+    try {
+        const response = await fetch(`${window.location.origin}/api/pins`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(pin)
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Pin added successfully:', result);
+            return result;
+        } else {
+            const error = await response.json();
+            throw new Error(`Failed to add pin: ${error.message}`);
+        }
+    } catch (error) {
+        console.error('Error adding pin:', error);
+        throw error;  // Re-throw to handle it according to the context of the call
     }
 }
 
@@ -147,8 +176,12 @@ function CameraPage({ user } : { user: User}) {
     
         // Process the image and get the object's material as a string
         try {
-            const mat = await getObjectMaterial_GPT(uri)
+            let mat = await getObjectMaterial_GPT(uri)
             setMaterial(mat);
+
+            if (mat !== "paper" && mat !== "plastic" && mat !== "glass") {
+                mat = "other";
+            }
 
             await fetch(`${window.location.origin}/api/facts/${mat}`)
                 .then((res) => res.json())
@@ -221,11 +254,25 @@ function CameraPage({ user } : { user: User}) {
                 break;
         }
         
+        // Update the user
         const numOfTrash = 1;
         addTrashCollected(user, numOfTrash);
         if (xpToAdd > 0) addXP(user, xpToAdd);
 
-        setProcessing(false); // Hides the loading screen
+        // Construct a placeholder pin
+        const tempPin = {
+            id: 3,
+            name: "University of Kansas",
+            latitude: -38,
+            longitude: -95
+        };
+
+        // Add a pin to the map
+        addPin(tempPin)
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+
+        setProcessing(false); // Hide the loading screen
     }, [material])
 
     // Processing/loading screen
