@@ -1,6 +1,13 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const { BigQuery } = require('@google-cloud/bigquery');
+const PROJECT_NAME = "hackku2024";
+const DATASET_NAME = "hackku_dataset";
+const bigquery = new BigQuery({
+    projectId: PROJECT_NAME,
+    keyFilename: "./bigquerycreds.json"
+});
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -10,15 +17,6 @@ app.listen(port, () => {
   console.log("Listening on port " + port);
 });
 
-const PROJECT_NAME = "hackku2024";
-const DATASET_NAME = "hackku_dataset";
-
-const { BigQuery } = require('@google-cloud/bigquery');
-const bigquery = new BigQuery({
-    projectId: PROJECT_NAME,
-    keyFilename: "./bigquerycreds.json"
-});
-
 /**
  * Inserts all rows from a specific BigQuery table.
  * 
@@ -26,7 +24,6 @@ const bigquery = new BigQuery({
  * @param {string} tableId - The ID of the table.
  * @param {object[]} rows - The rows to insert 
  */
-
 async function insertData(datasetId, tableId, rows) {
     try {
         const dataset = bigquery.dataset(datasetId);
@@ -81,7 +78,7 @@ async function updateData(datasetId, tableId, conditions, updates) {
     }
 }
 
-//================ API CALLS
+//================ API ENDPOINTS
 //==== GET
 app.get(`/api/users/:id`, async (req, res) => {
     const id = parseInt(req.params.id);
