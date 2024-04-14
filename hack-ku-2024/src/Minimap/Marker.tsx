@@ -64,7 +64,7 @@ function CustomMarker({ id }: { id: number }) {
 
         {infowindowOpen && (
           <InfoWindow
-            className="infowindow"
+            //className="infowindow"
             anchor={marker}
             disableAutoPan={true}
             onCloseClick={() => setInfowindowOpen(false)}
