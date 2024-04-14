@@ -30,8 +30,8 @@ bigquery ^0.0.6 <br />
 
 ## ${\color{lightpink}Technology \space used}$
 Google Cloud <br />
-- BigQuery <br />
-  - Google Maps API <br />
+  BigQuery <br />
+    Google Maps API <br />
 Node.JS <br />
 React (TypeScript) <br />
 
