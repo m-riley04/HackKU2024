@@ -257,9 +257,10 @@ function CameraPage({ user } : { user: User}) {
             // If there isn't an image yet...
                 : <Camera onTakePhoto={handleTakePhoto} idealFacingMode={FACING_MODES.ENVIRONMENT}/> 
             }
+            {(material) ? <ScanResults material={material} recyclable={recyclable} fact={fact?.body}></ScanResults> : <></>}
         </div>
 
-        {(material) ? <ScanResults material={material} recyclable={recyclable} fact={fact?.body}></ScanResults> : <></>}
+        
         </>
     );
 }
