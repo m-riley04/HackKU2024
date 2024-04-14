@@ -7,9 +7,12 @@ import NavigationButtons from './NavigationButtons/NavigationButtons';
 import LeaderboardPage from './Pages/LeaderboardPage';
 import { useEffect, useState } from 'react';
 import { User } from './interfaces';
+import { Button, Container, Form } from 'react-bootstrap';
+import LoadingIcon from './LoadingIcon/LoadingIcon';
 
 function App() {
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   /**
    * Sets the user hook based on a user ID
@@ -27,21 +30,47 @@ function App() {
       });
   }
 
-  //===== DEBUGGING USERS
+  /**
+   * Handles the log in process
+   */
+  function handleLogIn() {
+    setLoggedIn(true);
+  }
+
   useEffect(() => {
-    if (user == undefined) {
+    if (loggedIn == true) {
       // Set current user for debugging/placeholder
       const currentUserId = 1;
 
       // Get the current user from the database
       handleSetUser(currentUserId);
     }
-  }, [user]);
+  }, [loggedIn]);
+
+  if (!loggedIn) {
+    return (
+      <Container style={{alignItems: "center", marginTop: "35vh"}}>
+        <Form>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="Enter username" />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+          <Button onClick={handleLogIn} style={{width: "100px", backgroundColor: "#7a997e", color: "#222"}}> Log In </Button>
+        </Form>
+      </Container>
+    )
+  }
 
   if (!user) {
     return (
       <>
         <p>Loading user...</p>
+        <LoadingIcon></LoadingIcon>
       </>
     );
   }
