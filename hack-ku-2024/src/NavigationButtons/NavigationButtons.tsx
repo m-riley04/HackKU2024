@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router";
+import PictureButton from "./PictureButton";
+import "./NavigationButtons.scss"
 
 function NavigationButtons() {
     const navigate = useNavigate();
@@ -16,11 +18,11 @@ function NavigationButtons() {
     }
 
     return (
-        <footer style={{display: "inline-flex", margin: "auto"}}>
-            <button onClick={handleLeaderboard}>Leaderboard</button>
-            <button onClick={handleCamera}>Take a Picture</button>
-            <button onClick={handleHome}>Home</button>
-        </footer>
+        <div style={{display: "inline-flex", margin: "auto"}}>
+            <PictureButton onClick={handleLeaderboard} alt="Leaderboard"/>
+            <PictureButton onClick={handleCamera} alt="Camera"/>
+            <PictureButton onClick={handleHome} alt="Home"/>
+        </div>
     )
 }
 
