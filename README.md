@@ -7,7 +7,7 @@
 </p>
 
 ## ${\color{lightpink}Purpose}$  
-Glam up your community by picking up litter through this competitive and educational web app. Users will be able to upload locations of trash which will challenge others to go and pick it up, racking them up points with every piece collected and properly disposed of. Once the trash is disposed of users will also have facts available to them about the litter they are cleaning, allowing them to gain a wide range of knowledge about how our human activities affect the world we live in. 
+Glam up your community by picking up litter through this competitive and educational web app. Users will be able to upload locations of trash which will challenge others to go and pick it up, racking them up points with every piece collected and properly disposed of. Once the trash is disposed of users will also have facts available to them about the litter they are cleaning, allowing them to gain a wide range of knowledge about how our human activities affect the world we live in. You can find the DevPost project [here](https://devpost.com/software/glitter).
 
 ## ${\color{lightpink}Specifics}$
 **Frameworks** <br/>
