@@ -2,7 +2,9 @@
 ## $${\color{lightblue}Theme: Social \space Good}$$ 
 ### $${\color{lightblue}Project: gLitter \space \space \space \space Members:Averi,Ryland,Riley,Aryan}$$ 
 
-
+<p align="center">
+  <img src="https://raw.githubusercontent.com/m-riley04/HackKU2024/main/hack-ku-2024/images/banner.png" style="width: 600px"/>
+</p>
 
 ## ${\color{lightpink}Purpose}$  
 Glam up your community by picking up litter through this competitive and educational web app. Users will be able to upload locations of trash which will challenge others to go and pick it up, racking them up points with every piece collected and properly disposed of. Once the trash is disposed of users will also have facts available to them about the litter they are cleaning, allowing them to gain a wide range of knowledge about how our human activities affect the world we live in. 
