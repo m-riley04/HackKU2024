@@ -16,24 +16,24 @@ Frameworks <br />
 Node 21.5.0 <br />
 Dependencies <br />
 react ^18.2.0 <br />
-react-dom ^18.2.0
-react-bootstrap ^2.10.2
-express ^4.19.2
-react-geolocated ^4.1.2
-react-html5-camera-photo ^1.5.11
-sass ^1.75.0
-bootstrap ^5.3.3
-react-google-maps ^0.8.3
-openai ^4.33.1
-bigquery ^0.0.6
+react-dom ^18.2.0 <br />
+react-bootstrap ^2.10.2 <br />
+express ^4.19.2 <br />
+react-geolocated ^4.1.2 <br />
+react-html5-camera-photo ^1.5.11 <br />
+sass ^1.75.0 <br />
+bootstrap ^5.3.3 <br />
+react-google-maps ^0.8.3 <br />
+openai ^4.33.1 <br />
+bigquery ^0.0.6 <br />
 ## ${\color{lightpink}Upload \space instructions}$
 
 ## ${\color{lightpink}Technology \space used}$
-Google Cloud
-- BigQuery
-  - Google Maps API
-Node.JS
-React (TypeScript)
+Google Cloud <br />
+- BigQuery <br />
+  - Google Maps API <br />
+Node.JS <br />
+React (TypeScript) <br />
 
 
 
