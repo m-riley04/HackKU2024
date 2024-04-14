@@ -7,7 +7,7 @@ function SplashPage() {
         <Container>
             <h1>Warning</h1>
             <p>Please watch where you are going while playing gLitter. We are not responsible for any kind of injury that may occur.</p>
-            <button onClick={() => navigate("../")}>Accept and Continue</button>
+            <button onClick={() => navigate("../map")}>Accept and Continue</button>
         </Container>
     );
 }
