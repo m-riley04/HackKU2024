@@ -66,7 +66,7 @@ function App() {
               width: "100px",
               backgroundColor: "#7a997e",
               color: "#222",
-              fontSize: "1.5em",
+              fontSize: "0.9em",
             }}
           >
             {" "}

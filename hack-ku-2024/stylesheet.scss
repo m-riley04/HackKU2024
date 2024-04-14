@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
+@font-face {
+  font-family: "Dogica Pixel";
+  src: url("fonts/dogica/dogica.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 $bg-primary: #aabda0;
 $bg-secondary: #7a946c;
@@ -8,9 +14,7 @@ $button-bg-primary: #7a997e;
 :root {
   background-color: $bg-primary;
   color: $text-primary;
-  font-family: "Comfortaa", sans-serif;
-  font-weight: 700;
-  font-style: normal;
+  font-family: "Dogica Pixel";
 }
 
 body {
