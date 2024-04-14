@@ -16,3 +16,8 @@ Glam up your community by picking up litter through this competative and educati
 ## ${\color{lightpink}Upload \space instructions}$
 
 ## ${\color{lightpink}Technology \space used}$
+Google Cloud
+- BigQuery
+  - Google Maps API
+Node.JS
+React (TypeScript)
